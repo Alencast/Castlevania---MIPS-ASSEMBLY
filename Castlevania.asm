@@ -53,5 +53,41 @@ fimChão:
 	sw $10, 20720($8)
 	sw $10, 22060($8)
 	
-	addi $2, $0, 10
-	syscall
+	
+
+# Criação do castelo
+#========================================
+
+	lui $8, 0x1001         # Endereço base do bitmap display
+	addi $8, $8, 10600     # Define o deslocamento inicial da torre
+	ori $10, $0, 0xFF404040  # Define a cor cinza escuro
+	addi $11, $0, 18       # Variável de controle da largura da torre
+	addi $12, $0, 36       # Altura da torre
+
+torre1altura: 
+	beq $12, $0, fimTorre1altura
+	addi $11, $0, 18       # Reinicia a largura da linha
+
+torre1largura:
+	beq $11, $0, fimTorre1largura
+	sw $10, 0($8)          # Escreve no endereço apontado por $8
+	addi $8, $8, 4         # Avança para o próximo pixel
+	addi $11, $11, -1      # Decrementa a largura
+	j torre1largura
+
+fimTorre1largura:
+	sub $8, $8, 72         # Retorna ao início da linha atual
+	addi $8, $8, 512       # Salta para a próxima linha
+	addi $12, $12, -1      # Decrementa a altura
+	j torre1altura
+
+fimTorre1altura:
+	
+
+
+
+	
+	
+	
+	
+	
