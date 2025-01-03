@@ -1,8 +1,9 @@
 <div align="center">
- <img width="300"
-    alt="EmbarcaTech_logo"
-    src=https://ifce.edu.br/noticias/ifce-integra-capacitacao-nacional-em-sistemas-embarcados/captura-de-tela-2024-07-08-141318-1.jpg/@@images/a46e3b52-3b0c-450e-afa2-353600ffb4c2.jpeg
-    />
   <h1>Castlevania - Assembly Mips</h1> 
   Projeto de Castlevania desenvolvido em Assembly Mips  
 </div>
+
+## Etapa 1 - Criação do Cenário
+Conforme as regras dada pelo desenvolvimento do projeto, a quantidade de cenários seria igual a quantidade de integrantes, portanto, para Castlevania, seria dois cenários.
+
+No primeiro cenário, optamos por uma escadaria que viria de frente a um castelo, onde o jogador iria enfrentar o chefão, a ser desenvolvido. O cenário seria simples, com estrelas e uma lua vermelha.
