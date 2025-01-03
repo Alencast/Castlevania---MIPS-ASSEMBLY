@@ -12,19 +12,11 @@ No primeiro cenário, optamos por uma escadaria que viria de frente a um castelo
 1. Criação do fundo: Ok
 2. Criação do chão: Ok
 3. Criação das estrelas: Ok
-
-   
 4. Criação do Castelo: Ok
 5. Detalhes no castelo:
-
-
 6. Escadaria: Ok
-
-
 7. Lua: Ok
 8. Detalhes na lua:
-
-
 9. Árvore 1:
 10. Árvore 2:
 
