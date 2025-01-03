@@ -5,7 +5,7 @@ main:
 #========================================
 
 	lui $8, 0x1001
-	ori $9, 0x1A1A28 # Cor do Fundo
+	ori $9, 0x270013 # Cor do Fundo
 	
 	addi $20, $0, 524288 # Quantidade de pixels na tela
 	
