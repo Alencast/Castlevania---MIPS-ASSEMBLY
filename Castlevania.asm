@@ -24,7 +24,7 @@ fimCenário:
 #========================================
 
 	lui $8, 0x1001
-	ori $10, 0xA7A7A7
+	ori $10, 0x122E00
 
 	addi $21, $0, 1024
 Chão:	
@@ -63,7 +63,7 @@ fimChão:
 	lui $8, 0x1001         # Endereço base do bitmap display
 	addi $8, $8, 10600     # Define o deslocamento inicial da torre
 	ori $10, $0, 0xFF404040  # Define a cor cinza escuro
-	addi $11, $0, 18       # Variável de controle da largura da torre
+	addi $11, $0, 18      # Variável de controle da largura da torre
 	addi $12, $0, 36       # Altura da torre
 
 torre1altura: 
@@ -85,17 +85,8 @@ fimTorre1largura:
 
 fimTorre1altura:
 
-
-
-
-
-
-
-
-
-
-#torre2
-#============================================
+# Criação da Torre
+#========================================
 
 	lui $8, 0x1001         # Endereço base do bitmap display
 	addi $8, $8, 17840     # Define o deslocamento inicial da torre
@@ -122,14 +113,14 @@ fimTorre2largura:
 
 fimTorre2altura:
 
-#escadaria
-#============================================
+# Criação da Escadaria
+#========================================
 
 	lui $8, 0x1001         # Endereço base do bitmap display
 	addi $8, $8, 17840     # Define o deslocamento inicial da torre
 	ori $10, $0, 0xFF707070  # Define a cor cinza escuro
 	addi $11, $0, 24    # Variável de controle da largura da torre
-	addi $12, $0, 22      # Altura da torre 17840
+	addi $12, $0, 21      # Altura da torre 17840
 
 torre3altura: 
 	beq $12, $0, fimTorre3altura
@@ -150,26 +141,60 @@ fimTorre3largura:
 
 fimTorre3altura:
 
-#fim da escada
+# Fazendo a lua (PIXEL POR PIXEL)
+#========================================
 
-
-
-
-
-
-
-
-
-
-
+# Parte de cima da Lua
+	lui $8, 0x1001
+	ori $13, 0x630000
 	
+	sw $10, 6252($8)
+	sw $10, 6256($8)
+	sw $10, 6260($8)
+	sw $10, 6264($8)
+	sw $10, 6268($8)
 	
-	
+	sw $10, 6756($8)
+	sw $10, 6760($8)
+	sw $10, 6784($8)
+	sw $10, 6788($8)
 
+	sw $10, 7264($8)
+	sw $10, 7304($8)
+	sw $10, 7772($8)
+	sw $10, 7820($8)
+	
+	sw $10, 8284($8)
+	sw $10, 8332($8)
+	
+# Laterais da lua
+	sw $10, 8792($8)
+	sw $10, 9304($8)
+	sw $10, 9816($8)
+	sw $10, 10328($8)
+	sw $10, 10840($8)
 
-
+	sw $10, 8848($8)
+	sw $10, 9360($8)
+	sw $10, 9872($8)
+	sw $10, 10384($8)
+	sw $10, 10896($8)
 	
+# Parte de baixo da lua
+	sw $10, 11356($8)
+	sw $10, 11404($8)
+	sw $10, 11868($8)
+	sw $10, 11916($8)
+		
+	sw $10, 12384($8)
+	sw $10, 12424($8)
+	sw $10, 12900($8)
+	sw $10, 12904($8)
+	sw $10, 12928($8)
+	sw $10, 12932($8)
 	
-	
-	
-	
+	sw $10, 13436($8)
+	sw $10, 13432($8)
+	sw $10, 13428($8)
+	sw $10, 13424($8)
+	sw $10, 13420($8)
