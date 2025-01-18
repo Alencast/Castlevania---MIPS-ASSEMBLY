@@ -16,12 +16,11 @@ No primeiro cenário, optamos por uma escadaria que viria de frente a um castelo
 5. Detalhes no castelo:
 6. Escadaria: Ok
 7. Lua: Ok
-8. Detalhes na lua:
-9. Árvore 1:
-10. Árvore 2:
+8. Árvore 1: 
+9. Árvore 2:
 
 
-## Etapa 2 - Jogador
+## Etapa 2 - NPC e Jogador
 (A fazer)
 
 ## Etapa 3 - BOSS FIGHT
