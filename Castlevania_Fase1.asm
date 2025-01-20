@@ -5,17 +5,20 @@ main:
 #========================================
 
 	lui $8, 0x1001
+	addi $22 $8 32768
 	ori $9, 0x270013 # Cor do Fundo
 	
-	addi $20, $0, 524288 # Quantidade de pixels na tela
+	addi $20, $0, 8192 # Quantidade de pixels na tela
 	
 # Laço para geração de cenário, preencherá todos os pixels	
 Cenário: 
 	beq $20, $0, fimCenário
 	
 	sw $9, 0($8)
+	sw $9 0($22)
 	addi $20, $20, -1
 	addi $8, $8, 4
+	addi $22 $22 4
 	j Cenário
 	
 fimCenário:
@@ -24,7 +27,25 @@ fimCenário:
 #========================================
 
 	lui $8, 0x1001
+	addi $22 $8 32768
 	ori $10, 0xfffffff
+	
+	sw $10, 2700($8)
+	sw $10, 2920($8)
+	sw $10, 3004($8)
+	sw $10, 4380($8)
+	sw $10, 5328($8)
+	sw $10, 7720($8)
+	sw $10, 8680($8)
+	sw $10, 11200($8)
+	sw $10, 12020($8)
+	sw $10, 12108($8)
+	sw $10, 13300($8)
+	sw $10, 17020($8)
+	sw $10, 17840($8)
+	sw $10, 17720($8)
+	sw $10, 20720($8)
+	sw $10, 22060($8)
 	
 	sw $10, 2700($8)
 	sw $10, 2920($8)
@@ -574,30 +595,60 @@ portão:
 	
 NPC:
 	lui $8, 0x1001
+	addi $8 $8 25404
+	
+	sw $10 0($8)
+	
 	ori $17, 0x3cc28a
 
 	#sw $10, 25404($8) #PIXEL BASEADO
-	
-
 	#sw $9, 25268($8) # Destino
 	addi $12, $0, 34
 	
-desloc:
-	beq $12, $0, fimDesloc
-	sw $10, 25404($8)
-	sw $10, -4($8)
-	lw $9, 2048($8)
+deslocDir:
+	beq $12, $0, fimDeslocDir
+	
+	sw $10 -4($8)
+	lw $25 32768($8)
+	sw $25 0($8)
+	
+	
+	#sw $10, 25404($8)
+	#sw $10, -4($8)
+	#lw $9, 32768($8)
 	addi $8, $8, -4
 	sw $9, 25404($8)
 	jal timer
 	
 	addi $12, $12, -1
-	j desloc
+	j deslocDir
 	
-fimDesloc:
+fimDeslocDir:
+	addi $12, $0, 34
+DeslocEsq:
+	beq $12, $0, fimDeslocEsq
+	
+	sw $10 4($8)
+	lw $25 32768($8)
+	sw $25 0($8)
+	
+	#sw $10, 25404($8)
+	#sw $10, -4($8)
+	#lw $9, 32768($8)
+	addi $8, $8, 4
+	sw $9, 25404($8)
+	jal timer
+	
+	addi $12, $12, -1
+	j DeslocEsq
+
+fimDeslocEsq:
 	addi $2, $0, 10
 	syscall
 	
+	
+# ================================================
+# Timer
 timer: 
 	sw $16, 0($29)
        addi $29, $29, -4
