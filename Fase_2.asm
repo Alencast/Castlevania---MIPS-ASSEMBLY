@@ -51,7 +51,7 @@ teste:
 fimLava1:
 
 # ================================
-DetalhesdaLava:
+DetalhesVermelho:
 	lui $8, 0x1001
 	#ori $10, 0xcb1900
 	
@@ -187,6 +187,7 @@ teste2:
 
 fimLava2:
 
+detalhandoLaranja:
 	lui $8, 0x1001
 	sw $15, 4260($8)
 	sw $15, 4264($8)
@@ -248,15 +249,53 @@ teste3:
 
 fimLava3:
 
-detalhando:
+detalhandoAmarelo:
 	lui $8, 0x1001
 	ori $15, 0xff6300
 	
-	sw $16, 4268($8)
-	sw $16, 4276($8)
-	sw $16, 4788($8)
+	sw $15, 7344($8)
+	sw $15, 7856($8)
+	sw $15, 8368($8)
+	sw $15, 8880($8)
+	sw $15, 9392($8)
+	sw $15, 9904($8)
 	sw $15, 10416($8)
 	sw $15, 10928($8)
+	
+	sw $16, 12972($8)
+	sw $15, 12976($8)
+	
+	sw $15, 13488($8)
+	sw $15, 14000($8)
+	sw $15, 14512($8)
+	sw $15, 15024($8)
+	sw $15, 15536($8)
+	sw $15, 16048($8)
+	sw $15, 16560($8)
+	sw $15, 17072($8)
+	sw $15, 17584($8)
+	
+	sw $15, 7472($8)
+    	sw $15, 7984($8)
+    	sw $15, 8496($8)
+    	sw $15, 9008($8)
+    	sw $15, 9520($8)
+    	sw $15, 10032($8)
+    	sw $15, 10544($8)
+    	sw $15, 11056($8)
+
+    	sw $16, 13100($8)
+    	sw $15, 13104($8)
+
+    	sw $15, 13616($8)
+    	sw $15, 14128($8)
+    	sw $15, 14640($8)
+    	sw $15, 15152($8)
+    	sw $15, 15664($8)
+    	sw $15, 16176($8)
+    	sw $15, 16688($8)
+    	sw $15, 17200($8)
+
 	
 # ====================================
 # Colocando efeitos
@@ -268,10 +307,8 @@ detalhando:
 	
 # Criação do Chão
 #========================================
-
 	lui $8, 0x1001
 	ori $14, 0xFF303030
-
 	addi $21, $0, 1024
 Chão:	
 	beq $21, $0, fimChão
@@ -282,7 +319,6 @@ Chão:
 	j Chão
 
 fimChão:
-
 	lui $8, 0x1001
 	#ori $11, 0xFF303030
 	addi $21, $0, 1024
@@ -292,5 +328,120 @@ teto:
 	addi $21, $21, -1
 	addi $8, $8, 4
 	j teto
-
 fimTeto:
+
+# ================================= 
+# "Tijolos do Teto"
+
+	lui $8, 0x1001
+	ori $17, 0x7b7b7b
+	
+	addi $20, $0, 12 # Altura
+	
+tijoloTet1:
+	beq $20, $0, fimTet1
+	
+	sw $17, 64($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloTet1
+
+fimTet1:
+	addi $20, $0, 12 # Altura
+	
+tijoloTet2:
+	beq $20, $0, fimTet2
+	
+	sw $17, 632($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloTet2
+
+fimTet2:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLin:
+	beq $20, $0, fimL1
+	
+	sw $17, 1536($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLin
+	
+fimL1:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLin2:
+	beq $20, $0, fimL2
+	
+	sw $17, 3584($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLin2
+	
+fimL2:
+
+# ================================= 
+# "Tijolos do Chão"
+
+	lui $8, 0x1001
+	ori $17, 0x7b7b7b
+	
+	addi $20, $0, 12 # Altura
+	
+tijoloChão1:
+	beq $20, $0, fimChão1
+	
+	sw $17, 28736($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloChão1
+
+fimChão1:
+	addi $20, $0, 12 # Altura
+	
+tijoloChão2:
+	beq $20, $0, fimChão2
+	
+	sw $17, 29272($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloChão2
+
+fimChão2:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLinha:
+	beq $20, $0, fimLinha
+	
+	sw $17, 30208($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLinha
+	
+fimLinha:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLinha2:
+	beq $20, $0, fimLinha2
+	
+	sw $17, 32256($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLinha2
+	
+fimLinha2:
+	addi $2, $0, 10
+	syscall
