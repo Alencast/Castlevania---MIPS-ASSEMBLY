@@ -49,17 +49,16 @@ main:
 	add $5 $0 $0
 	jal portão
 	
+	lui $4, 0x1001
 	add $5 $0 $0
-	jal NPC
-
-
-
-
-
-
-
-
-
+	add $6, $0, $0
+	jal desenharNPC
+	
+	#lui $4, 0x1001
+	#add $5 $0 $0
+	#add $6 $0 $0
+	#add $7 $0 $0
+	#jal desenharNPC
 
 
 
@@ -662,71 +661,110 @@ portão:
 	sw $5, 27624($4)
 	sw $5, 28136($4)
 	sw $5, 28648($4)
+	
+
 
 # ============================================
-# CRIAÇÃO DO NPC
-NPC:
-	lui $4, 0x1001	
-	addi $4, $4, 25404
+# Movimentação DO NPC
+#NPC:
+#	lui $4, 0x1001
+#	addi $4, $4, 25404
+#	ori $5, 0xffffff
+#	sw $5, 0($4)
+#	addi $12, $0, 34
+#	
+#deslocDir:
+#	beq $12, $0, fimDeslocDir
+#	sw $5, -4($4)
+#	lw $25, 32768($4)
+#	sw $25, 0($4)
+#	addi $4, $4, -4
+#	sw $9, 25404($4)
+#	jal timer
+#	addi $12, $12, -1
+#	j deslocDir
+#fimDeslocDir:
+#	addi $12, $0, 34
+#DeslocEsq:
+#	beq $12, $0, fimDeslocEsq
+#	sw $5, 4($4)
+#	lw $25, 32768($4)
+#	sw $25, 0($4)
+#	addi $4, $4, 4
+#	sw $9, 25404($4)
+#	jal timer
+#	
+#	addi $12, $12, -1
+#	j DeslocEsq
+#
+#fimDeslocEsq:
+#	j NPC
+
+# ============================================
+# Fazendo o primeiro NPC
+
+#desenharNPC:
+#	ori $5, 0xffffff
+#	ori $6, 0x3cc28a
+
+	#sw $6, 24892($4)
+	#sw $6, 24896($4)
+	#sw $6, 24384($4)
+	#sw $6, 24388($4)
+
+	#sw $6, 25416($4)
+	#sw $6, 25420($4)
+	#sw $6, 24908($4)
+	#sw $6, 24912($4)
+
+	#sw $6, 26952($4)
+	#sw $6, 26956($4)
+	#sw $6, 26960($4)
+	#sw $6, 26448($4)
+	#sw $6, 26452($4)
+# =============================
+# Função que desenha a caveira
+desenharNPC:
 	ori $5, 0xffffff
+	ori $6, 0x000000
+	ori $7, 0x00ff88
 	
-	
-	sw $5, 0($4)
-
-	#sw $10, 25404($4) #PIXEL BASEADO
-	#sw $9, 25268($4) # Destino
-	addi $12, $0, 34
-	
-deslocDir:
-	beq $12, $0, fimDeslocDir
-	
-	sw $5, -4($4)
-	lw $25, 32768($4)
-	sw $25, 0($4)
-	
-	#sw $10, 25404($4)
-	#sw $10, -4($4)
-	#lw $9, 32768($4)
-	addi $4, $4, -4
-	sw $9, 25404($4)
-	jal timer
-	
-	addi $12, $12, -1
-	j deslocDir
-	
-fimDeslocDir:
-	addi $12, $0, 34
-DeslocEsq:
-	beq $12, $0, fimDeslocEsq
-	
+	addi $4, $4, 25400
 	sw $5, 4($4)
-	lw $25, 32768($4)
-	sw $25, 0($4)
+	sw $5, 8($4)
+	sw $5, 12($4)
+	sw $5, 512($4)
 	
-	#sw $10, 25404($4)
-	#sw $10, -4($4)
-	#lw $9, 32768($4)
-	addi $4, $4, 4
-	sw $9, 25404($4)
-	jal timer
+	sw $5, 520($4)
+	sw $6, 524($4)
+	sw $5, 528($4)
+	sw $6, 532($4)
 	
-	addi $12, $12, -1
-	j DeslocEsq
+	sw $5, 1024($4)
+	sw $5, 1028($4)
+	sw $5, 1032($4)
+	sw $5, 1036($4)
+	sw $5, 1040($4)
+	
+	sw $5, 1540($4)
+	sw $5, 1548($4)
+	
+	jr $31
 
-fimDeslocEsq:
-	j NPC
 
 # ================================================
 # Timer
 timer: 
 	sw $16, 0($29)
-       addi $29, $29, -4
-       addi $16, $0, 200000
-forT:  beq $16, $0, fimT
-       nop
-       nop
-       addi $16, $16, -1      
-       j forT                  
-fimT:  addi $29, $29, 4                                                    
-       lw $16, 0($29)          
-       jr $31
+       	addi $29, $29, -4
+       	addi $16, $0, 200000
+forT:  
+	beq $16, $0, fimT
+       	nop
+       	nop
+       	addi $16, $16, -1      
+       	j forT                  
+fimT:  
+	addi $29, $29, 4                                                    
+       	lw $16, 0($29)          
+       	jr $31
