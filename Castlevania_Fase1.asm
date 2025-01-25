@@ -15,7 +15,7 @@ main:
 	
 	lui $4, 0x1001
 	add $5 $0 $0
-	jal árvore1
+	jal arvore1
 	
 	lui $4, 0x1001
 	add $5 $0 $0
@@ -43,11 +43,11 @@ main:
 	
 	lui $4, 0x1001
 	add $5 $0 $0
-	jal CriaçãoChão
+	jal CriacaoChao
 	
 	lui $4, 0x1001
 	add $5 $0 $0
-	jal portão
+	jal portao
 	
 	lui $4, 0x1001
 	add $5 $0 $0
@@ -68,17 +68,17 @@ funcaoCenario:
 	addi $22 $4 32768
 	
 # Laço para geração de cenário, preencherá todos os pixels	
-Cenário: 
-	beq $6, $0, fimCenário
+Cenario: 
+	beq $6, $0, fimCenario
 	
 	sw $5, 0($4)
 	sw $5 0($22)
 	addi $6, $6, -1
 	addi $4, $4, 4
 	addi $22 $22 4
-	j Cenário
+	j Cenario
 	
-fimCenário:
+fimCenario:
 	jr $31
 
 # Criação de estrelas
@@ -326,7 +326,7 @@ Lua:
 
 # ====================================
 # Grande árvore
-árvore1:
+arvore1:
 	ori $5, 0x000000
 	
 	sw $5, 11888($4)
@@ -590,25 +590,25 @@ PilaresCastelo:
 	
 # Criação do Chão
 #========================================
-CriaçãoChão:
+CriacaoChao:
 	ori $5, 0x122E00
 
 	addi $21, $0, 1024
-Chão:	
-	beq $21, $0, fimChão
+Chao:	
+	beq $21, $0, fimChao
 	
 	sw $5, 28672($4)
 	addi $21, $21, -1
 	addi $4, $4, 4
-	j Chão
+	j Chao
 
-fimChão:
+fimChao:
 	jr $31
 	
 # Portão do Castelo
 #========================================
 
-portão:
+portao:
 	ori $5, 0x2b2929
 	
 	#sw $5, 25552($4)
@@ -661,8 +661,6 @@ portão:
 	sw $5, 27624($4)
 	sw $5, 28136($4)
 	sw $5, 28648($4)
-	
-	jr $31
 
 # ============================================
 # Fazendo o primeiro NPC
@@ -686,62 +684,15 @@ portão:
 	#sw $6, 26960($4)
 	#sw $6, 26448($4)
 	#sw $6, 26452($4)
-# =============================
-# Função que desenha a caveira
-desenharNPC:
-	ori $5, 0xffffff
-	ori $6, 0x000000
-	ori $7, 0x00ff88
-	
-	#sw $5, 25404($4)
-	#sw $5, 25408($4)
-	#sw $5, 25412($4)
-	#sw $5, 25912($4)
-	
-	#sw $5, 25920($4)
-	#sw $6, 25924($4)
-	#sw $5, 25928($4)
-	#sw $6, 25916($4)
-	
-	#sw $5, 26424($4)
-	#sw $5, 26428($4)
-	#sw $5, 26432($4)
-	#sw $5, 26436($4)
-	#sw $5, 26440($4)
-	
-	#sw $5, 26940($4)
-	#sw $5, 26948($4)
-
-	addi $4, $4, 25400
-	sw $5, 4($4)
-	sw $5, 8($4)
-	sw $5, 12($4)
-	sw $5, 512($4)
-	
-	sw $5, 520($4)
-	sw $6, 524($4)
-	sw $5, 528($4)
-	sw $6, 516($4)
-	
-	sw $5, 1024($4)
-	sw $5, 1028($4)
-	sw $5, 1032($4)
-	sw $5, 1036($4)
-	sw $5, 1040($4)
-	
-	sw $5, 1540($4)
-	sw $5, 1548($4)
-	
-	jr $31
 
 # ============================================
 # Movimentação DO NPC
 NPC:
 	lui $4, 0x1001
 	#addi $4, $4, 25404
-	#addi $4, $4, 25404
+	addi $4, $4, 25404
 
-	jal desenharNPC
+	#jal desenharNPC
 	ori $5, 0xffffff
 	sw $5, 0($4)
 	addi $12, $0, 34
@@ -749,10 +700,16 @@ NPC:
 deslocDir:
 	beq $12, $0, fimDeslocDir
 	sw $5, -4($4)
-	lw $25, 32768($4)
-	sw $25, 0($4)
+	#lw $25, 32768($4)
+	#sw $25, 0($4)
 	addi $4, $4, -4
+	jal desenharNPC
 	sw $9, 25404($4)
+	lw $25, 32768($4)
+	sw $25, 20($4)
+	sw $25 532($4)
+	sw $25 1044($4)
+	sw $25 1556($4)
 	jal timer
 	addi $12, $12, -1
 	j deslocDir
@@ -761,9 +718,15 @@ fimDeslocDir:
 DeslocEsq:
 	beq $12, $0, fimDeslocEsq
 	sw $5, 4($4)
-	lw $25, 32768($4)
-	sw $25, 0($4)
+	#lw $25, 32768($4)
+	#sw $25, 0($4)
 	addi $4, $4, 4
+	jal desenharNPC
+	lw $25, 32768($4)
+	sw $25, -4($4)
+	sw $25 508($4)
+	sw $25 1020($4)
+	sw $25 1532($4)
 	sw $9, 25404($4)
 	jal timer
 	
@@ -772,6 +735,59 @@ DeslocEsq:
 
 fimDeslocEsq:
 	j NPC
+	
+# =============================
+# Função que desenha a caveira
+desenharNPC:
+	ori $5, 0xffffff
+	ori $6, 0x000000
+	ori $7, 0x270013
+	
+	sw $7 0($4)
+	sw $5, 4($4)
+	sw $5, 8($4)
+	sw $5, 12($4)
+	sw $7 16($4)
+	
+	sw $5, 512($4)
+	sw $6, 516($4)
+	sw $5, 520($4)
+	sw $6, 524($4)
+	sw $5 528($4)
+
+	sw $5, 1024($4)
+	sw $5, 1028($4)
+	sw $5, 1032($4)
+	sw $5, 1036($4)
+	sw $5, 1040($4)
+	
+	sw $7 1536($4)
+	sw $5, 1540($4)
+	sw $7 1544($4)
+	sw $5, 1548($4)
+	sw $7 1552($4)
+
+	#addi $4, $4, 25400
+	#sw $5, 4($4)
+	#sw $5, 8($4)
+	#sw $5, 12($4)
+	#sw $5, 512($4)
+	
+	#sw $5, 520($4)
+	#sw $6, 524($4)
+	#sw $5, 528($4)
+	#sw $6, 516($4)
+	
+	#sw $5, 1024($4)
+	#sw $5, 1028($4)
+	#sw $5, 1032($4)
+	#sw $5, 1036($4)
+	#sw $5, 1040($4)
+	
+	#sw $5, 1540($4)
+	#sw $5, 1548($4)
+	
+	jr $31
 
 
 # ================================================
@@ -779,7 +795,7 @@ fimDeslocEsq:
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 10000
+       	addi $16, $0, 200000
 forT:  
 	beq $16, $0, fimT
        	nop
