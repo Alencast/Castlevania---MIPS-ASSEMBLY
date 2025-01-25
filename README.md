@@ -24,9 +24,9 @@ No primeiro cenário, optamos por uma escadaria que viria de frente a um castelo
 Nessa etapa precisamos implementar algumas mecânicas: Geração de personagem e NPC movimento e dano.
 
 ### Coisas a fazer:
-1. Desenhar o NPC:
+1. Desenhar o NPC: Ok
 2. Desenhar o Jogador:
-3. Movimentação NPC:
+3. Movimentação NPC: Ok
 4. Movimentação Jogador:
 5. Mecânica de ataque:
 6. Mecânica de PERDEU/Dano:
