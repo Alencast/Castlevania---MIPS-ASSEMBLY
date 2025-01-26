@@ -1,0 +1,804 @@
+main:
+# Criação do Cenário 1
+#========================================
+
+	lui $4, 0x1001
+	ori $5, 0x270013
+	addi $6, $0, 8192 # Quantidade de pixels na tela
+	
+	jal funcaoCenario
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoLava1
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoDetalhesVermelhos
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoLava2
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoDetalhandoLaranja
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal Lava3
+	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal detalhandoAmarelo
+	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoCruz
+	
+# Laço para geração de cenário, preencherá todos os pixels
+funcaoCenario:	
+	addi $20, $0, 524288 # Quantidade de pixels na tela
+Cenário: 
+	
+	beq $6, $0, fimCenário
+	
+	sw $5, 0($4)
+	addi $6, $6, -1
+	addi $20, $20, -1
+	addi $4, $4, 4
+	j Cenário
+	
+fimCenário:
+	jr $31
+
+# ==============================
+# Criação da lava 1
+
+funcaoLava1:
+Lava1:
+	lui $4, 0x1001
+	ori $5, 0xcb1900
+	
+	addi $11, $0, 128
+	addi $12, $0, 1920
+	addi $13, $0, 256
+teste:
+	beq $13, $0, fimLava1
+	beq $12, $0, fimLava1
+	
+		sw $5, 168($4)
+	sw $5, 172($4)
+	sw $5, 176($4)
+	sw $5, 180($4)
+	sw $5, 184($4)
+
+	sw $5, 296($4)
+	sw $5, 300($4)
+	sw $5, 304($4)
+	sw $5, 308($4)
+	sw $5, 312($4)
+
+	addi $4, $4, 512
+	addi $11, $11, -1
+	addi $13, $13, -1
+	j teste
+
+
+fimLava1:
+	jr $31
+
+# ================================
+funcaoDetalhesVermelhos:
+
+DetalhesVermelho:
+	
+	ori $5, 0xcb1900
+	sw $5, 4260($4)
+	sw $5, 4256($4)
+	sw $5, 4252($4)
+	sw $5, 4248($4)
+	sw $5, 4764($4)
+	sw $5, 4768($4)
+	sw $5, 4772($4)
+	sw $5, 5284($4)
+	sw $5, 5796($4)
+	sw $5, 6308($4)
+	sw $5, 28308($4)
+	sw $5, 28312($4)
+	sw $5, 28316($4)
+	sw $5, 28320($4)
+	sw $5, 28324($4)
+	sw $5, 27804($4)
+	sw $5, 27808($4)
+	sw $5, 27812($4)
+	sw $5, 27296($4)
+	sw $5, 27300($4)
+	sw $5, 26788($4)
+	
+	sw $5, 4284($4)
+	sw $5, 4288($4)
+	sw $5, 4292($4)
+	sw $5, 4296($4)
+	sw $5, 4280($4)
+	sw $5, 4276($4)
+	sw $5, 4280($4)  # Aqui somou 8 porque era 4 menor
+	sw $5, 4792($4)
+	sw $5, 4796($4)
+	sw $5, 4800($4)
+	sw $5, 4804($4)
+	sw $5, 5308($4)
+	sw $5, 5820($4)
+	sw $5, 6332($4)
+	sw $5, 28336($4)
+	sw $5, 28340($4)
+	sw $5, 28344($4)
+	sw $5, 28348($4)
+	sw $5, 28352($4)
+	sw $5, 28356($4)
+	sw $5, 28360($4)
+	sw $5, 28364($4)
+	sw $5, 27832($4)
+	sw $5, 27836($4)
+	sw $5, 27840($4)
+	sw $5, 27844($4)
+	sw $5, 27324($4)
+	sw $5, 27328($4)
+	sw $5, 26812($4)
+	
+	sw $5, 4388($4)
+	sw $5, 4384($4)
+	sw $5, 4380($4)
+	sw $5, 4376($4)
+	sw $5, 4892($4)
+	sw $5, 4896($4)
+	sw $5, 4900($4)
+	sw $5, 5412($4)
+	sw $5, 5924($4)
+	sw $5, 6436($4)
+	sw $5, 28436($4)
+	sw $5, 28440($4)
+	sw $5, 28444($4)
+	sw $5, 28448($4)
+	sw $5, 28452($4)
+	sw $5, 27932($4)
+	sw $5, 27936($4)
+	sw $5, 27940($4)
+	sw $5, 27424($4)
+	sw $5, 27428($4)
+	sw $5, 26916($4)
+
+	sw $5, 4412($4)
+	sw $5, 4416($4)
+	sw $5, 4420($4)
+	sw $5, 4424($4)
+	sw $5, 4408($4)
+	sw $5, 4404($4)
+	sw $5, 4408($4)
+	sw $5, 4920($4)
+	sw $5, 4924($4)
+	sw $5, 4928($4)
+	sw $5, 4932($4)
+	sw $5, 5436($4)
+	sw $5, 5948($4)
+	sw $5, 6460($4)
+	sw $5, 28464($4)
+	sw $5, 28468($4)
+	sw $5, 28472($4)
+	sw $5, 28476($4)
+	sw $5, 28480($4)
+	sw $5, 28484($4)
+	sw $5, 28488($4)
+	sw $5, 28492($4)
+	sw $5, 27960($4)
+	sw $5, 27964($4)
+	sw $5, 27968($4)
+	sw $5, 27972($4)
+	sw $5, 27452($4)
+	sw $5, 27456($4)
+	sw $5, 26940($4)	
+	jr $31
+
+# ==============================
+# Criação da lava 2
+funcaoLava2:
+Lava2:
+	
+	ori $5, 0xff6300
+	
+	addi $11, $0, 128
+	addi $12, $0, 1920
+	addi $13, $0, 256
+teste2:
+	beq $13, $0, fimLava2
+	beq $12, $0, fimLava2
+	
+	sw $5, 172($4)
+	sw $5, 176($4)
+	sw $5, 180($4)
+	
+	sw $5, 300($4)
+	sw $5, 304($4)
+	sw $5, 308($4)
+	
+	addi $4, $4, 512
+	addi $11, $11, -1
+	addi $13, $13, -1
+	j teste2
+
+fimLava2:
+	jr $31
+
+funcaoDetalhandoLaranja:
+
+detalhandoLaranja:
+	ori $5, 0xff6300
+	
+	sw $5, 4260($4)
+	sw $5, 4264($4)
+	sw $5, 4776($4)
+	sw $5, 5288($4)
+	sw $5, 5800($4)
+	
+	sw $5, 4280($4)
+	sw $5, 4792($4)
+	sw $5, 5304($4)
+
+	sw $5, 28344($4)
+	sw $5, 28344($4)
+	sw $5, 28348($4)
+	sw $5, 27832($4)
+	sw $5, 27320($4)
+	
+	sw $5, 28472($4)
+	sw $5, 28472($4)
+	sw $5, 28476($4)
+	sw $5, 27960($4)
+	sw $5, 27448($4)
+
+	sw $5, 4388($4)
+	sw $5, 4392($4)
+	sw $5, 4904($4)
+	sw $5, 5416($4)
+	sw $5, 5928($4)
+
+	sw $5, 4408($4)
+	sw $5, 4920($4)
+	sw $5, 5432($4)
+
+	
+	jal funcaoDetalhandoLaranja
+
+
+# ==============================
+# Criação da lava 3
+
+
+Lava3:
+	
+	ori $5, 0xffb100
+	
+	addi $11, $0, 128
+	addi $12, $0, 1920
+	addi $13, $0, 256
+teste3:
+	beq $13, $0, fimLava3
+	beq $12, $0, fimLava3
+	
+	sw $5, 176($4)
+	
+	sw $5, 304($4)
+	
+	addi $4, $4, 512
+	addi $11, $11, -1
+	addi $13, $13, -1
+	j teste3
+
+fimLava3:
+	jr $31
+
+detalhandoAmarelo:
+	
+	ori $5, 0xff6300
+	
+	sw $5, 7344($4)
+	sw $5, 7856($4)
+	sw $5, 8368($4)
+	sw $5, 8880($4)
+	sw $5, 9392($4)
+	sw $5, 9904($4)
+	sw $5, 10416($4)
+	sw $5, 10928($4)
+	
+	sw $16, 12972($4)
+	sw $5, 12976($4)
+	
+	sw $5, 13488($4)
+	sw $5, 14000($4)
+	sw $5, 14512($4)
+	sw $5, 15024($4)
+	sw $5, 15536($4)
+	sw $5, 16048($4)
+	sw $5, 16560($4)
+	sw $5, 17072($4)
+	sw $5, 17584($4)
+	
+	sw $5, 7472($4)
+	sw $5, 7984($4)
+	sw $5, 8496($4)
+	sw $5, 9008($4)
+	sw $5, 9520($4)
+	sw $5, 10032($4)
+	sw $5, 10544($4)
+	sw $5, 11056($4)
+
+	sw $16, 13100($4)
+	sw $5, 13104($4)
+
+	sw $5, 13616($4)
+	sw $5, 14128($4)
+	sw $5, 14640($4)
+	sw $5, 15152($4)
+	sw $5, 15664($4)
+	sw $5, 16176($4)
+	sw $5, 16688($4)
+	sw $5, 17200($4)
+	jr $31
+
+
+	
+# ====================================
+# Colocando efeitos
+
+	#lui $8, 0x1001
+	#ori $11, 0x
+
+	
+	
+# Criação do Chão
+#========================================
+	lui $8, 0x1001
+	ori $14, 0xFF303030
+	addi $21, $0, 1024
+Chão:	
+	beq $21, $0, fimChão
+	
+	sw $14, 28672($8)
+	addi $21, $21, -1
+	addi $8, $8, 4
+	j Chão
+
+fimChão:
+	lui $8, 0x1001
+	#ori $11, 0xFF303030
+	addi $21, $0, 1024
+teto:
+	beq $21, $0, fimTeto
+	sw $14, 0($8)
+	addi $21, $21, -1
+	addi $8, $8, 4
+	j teto
+fimTeto:
+
+# ================================= 
+# "Tijolos do Teto"
+
+	lui $8, 0x1001
+	ori $17, 0x7b7b7b
+	
+	addi $20, $0, 12 # Altura
+	
+tijoloTet1:
+	beq $20, $0, fimTet1
+	
+	sw $17, 64($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloTet1
+
+fimTet1:
+	addi $20, $0, 12 # Altura
+	
+tijoloTet2:
+	beq $20, $0, fimTet2
+	
+	sw $17, 632($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloTet2
+
+fimTet2:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLin:
+	beq $20, $0, fimL1
+	
+	sw $17, 1536($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLin
+	
+fimL1:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLin2:
+	beq $20, $0, fimL2
+	
+	sw $17, 3584($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLin2
+	
+fimL2:
+
+# ================================= 
+# "Tijolos do Chão"
+
+	lui $8, 0x1001
+	ori $17, 0x7b7b7b
+	
+	addi $20, $0, 12 # Altura
+	
+tijoloChão1:
+	beq $20, $0, fimChão1
+	
+	sw $17, 28736($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloChão1
+
+fimChão1:
+	addi $20, $0, 12 # Altura
+	
+tijoloChão2:
+	beq $20, $0, fimChão2
+	
+	sw $17, 29272($8) # Onde começa
+	
+	addi $20, $20, -1
+	addi $8, $8, 128 # Distância entre os pixels
+
+	j tijoloChão2
+
+fimChão2:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLinha:
+	beq $20, $0, fimLinha
+	
+	sw $17, 30208($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLinha
+	
+fimLinha:
+	lui $8, 0x1001
+	
+	addi $20, $20, 128
+testeLinha2:
+	beq $20, $0, fimLinha2
+	
+	sw $17, 32256($8)
+	addi $8, $8, 4 
+	addi $20, $20, -1
+	j testeLinha2
+	
+fimLinha2:
+
+# Criação da Cruz
+#================================
+funcaoCruz:
+	        
+	
+	addi $11, $0, 6    # Variável de controle da largura da torre
+	addi $13, $0, 36       # Altura da torre
+
+cruz1altura: 
+	beq $13, $0, fimCruz1altura
+	addi $11, $0, 6       # Reinicia a largura da linha
+
+cruz1largura:
+	beq $11, $0, fimCruz1largura
+	sw $12, 0($4)          # Escreve no endereço apontado por $8
+	addi $4, $4, 4         # Avança para o próximo pixel
+	addi $11, $11, -1      # Decrementa a largura
+	j cruz1largura
+
+fimCruz1largura:
+	sub $4, $4, 24         # Retorna ao início da linha atual (ajustado para largura menor)
+	addi $4, $4, 512       # Salta para a próxima linha
+	addi $13, $13, -1      # Decrementa a altura
+	j cruz1altura
+
+fimCruz1altura:
+
+#pontas da cruz
+
+	sw $5, 10468($4)
+	sw $5, 10496($4)
+	
+	sw $5, 14020($4)
+	sw $5, 14052($4)
+	sw $5, 14080($4)
+	sw $5, 14108($4)
+	sw $5, 17180($4)
+	sw $5, 17152($4)
+	sw $5, 17124($4)
+	sw $5, 17092($4)
+
+# cruz
+
+	sw $5, 14528($4)	
+	sw $5, 14532($4)
+	sw $5, 14536($4)
+	sw $5, 14540($4)
+	sw $5, 14544($4)
+	sw $5, 14548($4)
+	sw $5, 14552($4)
+	sw $5, 14556($4)
+	sw $5, 14560($4)
+	sw $5, 14564($4)
+	sw $5, 14592($4)
+	sw $5, 14596($4)
+	sw $5, 14600($4)
+	sw $5, 14604($4)
+	sw $5, 14608($4)
+	sw $5, 14612($4)
+	sw $5, 14616($4)
+	sw $5, 14620($4)
+	sw $5, 14624($4)
+
+	sw $5, 15040($4)
+	sw $5, 15044($4)
+	sw $5, 15048($4)
+	sw $5, 15052($4)
+	sw $5, 15056($4)
+	sw $5, 15060($4)
+	sw $5, 15064($4)
+	sw $5, 15068($4)
+	sw $5, 15072($4)
+	sw $5, 15076($4)
+	sw $5, 15104($4)
+	sw $5, 15108($4)
+	sw $5, 15112($4)
+	sw $5, 15116($4)
+	sw $5, 15120($4)
+	sw $5, 15124($4)
+	sw $5, 15128($4)
+	sw $5, 15132($4)
+	sw $5, 15136($4)
+
+	sw $5, 15552($4)
+	sw $5, 15556($4)
+	sw $5, 15560($4)
+	sw $5, 15564($4)
+	sw $5, 15568($4)
+	sw $5, 15572($4)
+	sw $5, 15576($4)
+	sw $5, 15580($4)
+	sw $5, 15584($4)
+	sw $5, 15588($4)
+	sw $5, 15616($4)
+	sw $5, 15620($4)
+	sw $5, 15624($4)
+	sw $5, 15628($4)
+	sw $5, 15632($4)
+	sw $5, 15636($4)
+	sw $5, 15640($4)
+	sw $5, 15644($4)
+	sw $5, 15648($4)
+
+	sw $5, 16064($4)
+	sw $5, 16068($4)
+	sw $5, 16072($4)
+	sw $5, 16076($4)
+	sw $5, 16080($4)
+	sw $5, 16084($4)
+	sw $5, 16088($4)
+	sw $5, 16092($4)
+	sw $5, 16096($4)
+	sw $5, 16100($4)
+	sw $5, 16128($4)
+	sw $5, 16132($4)
+	sw $5, 16136($4)
+	sw $5, 16140($4)
+	sw $5, 16144($4)
+	sw $5, 16148($4)
+	sw $5, 16152($4)
+	sw $5, 16156($4)
+	sw $5, 16160($4)
+
+	sw $5, 16576($4)
+	sw $5, 16580($4)
+	sw $5, 16584($4)
+	sw $5, 16588($4)
+	sw $5, 16592($4)
+	sw $5, 16596($4)
+	sw $5, 16600($4)
+	sw $5, 16604($4)
+	sw $5, 16608($4)
+	sw $5, 16612($4)
+	sw $5, 16640($4)
+	sw $5, 16644($4)
+	sw $5, 16648($4)
+	sw $5, 16652($4)
+	sw $5, 16656($4)
+	sw $5, 16660($4)
+	sw $5, 16664($4)
+	sw $5, 16668($4)
+	sw $5, 16672($4)
+
+	
+	jr $31 
+
+#quadrado vermelho no meio da cruz
+#========================================
+	lui $9, 0x1001
+	ori $11, 0xFF0000
+
+	sw $11, 15080($9)
+	sw $11, 15084($9)
+	sw $11, 15088($9)
+	sw $11, 15092($9)
+	sw $11, 15096($9)
+	sw $11, 15100($9)
+
+	sw $11, 15592($9)
+	sw $11, 15596($9)
+	sw $11, 15600($9)
+	sw $11, 15604($9)
+	sw $11, 15608($9)
+	sw $11, 15612($9)
+
+	sw $11, 15592($9)
+	sw $11, 16104($9)
+	sw $11, 16108($9)
+	sw $11, 16112($9)
+	sw $11, 16116($9)
+	sw $11, 16120($9)
+	sw $11, 16124($9)
+	
+	jr $31
+
+# ============================================
+# Movimentação DO NPC
+NPC:
+	lui $4, 0x1001
+	#addi $4, $4, 25404
+	addi $4, $4, 25404
+
+	#jal desenharNPC
+	ori $5, 0xffffff
+	sw $5, 0($4)
+	addi $12, $0, 34
+	
+deslocDir:
+	beq $12, $0, fimDeslocDir
+	sw $5, -4($4)
+	#lw $25, 32768($4)
+	#sw $25, 0($4)
+	addi $4, $4, -4
+	jal desenharNPC
+	sw $9, 25404($4)
+	lw $25, 32768($4)
+	sw $25, 20($4)
+	sw $25 532($4)
+	sw $25 1044($4)
+	sw $25 1556($4)
+	jal timer
+	addi $12, $12, -1
+	j deslocDir
+fimDeslocDir:
+	addi $12, $0, 34
+DeslocEsq:
+	beq $12, $0, fimDeslocEsq
+	sw $5, 4($4)
+	#lw $25, 32768($4)
+	#sw $25, 0($4)
+	addi $4, $4, 4
+	jal desenharNPC
+	lw $25, 32768($4)
+	sw $25, -4($4)
+	sw $25 508($4)
+	sw $25 1020($4)
+	sw $25 1532($4)
+	sw $9, 25404($4)
+	jal timer
+	
+	addi $12, $12, -1
+	j DeslocEsq
+
+fimDeslocEsq:
+	j NPC
+
+# Função que desenha a caveira
+desenharNPC:
+	ori $5, 0xffffff
+	ori $6, 0x000000
+	ori $7, 0x270013
+	
+	sw $7 0($4)
+	sw $5, 4($4)
+	sw $5, 8($4)
+	sw $5, 12($4)
+	sw $7 16($4)
+	
+	sw $5, 512($4)
+	sw $6, 516($4)
+	sw $5, 520($4)
+	sw $6, 524($4)
+	sw $5 528($4)
+
+	sw $5, 1024($4)
+	sw $5, 1028($4)
+	sw $5, 1032($4)
+	sw $5, 1036($4)
+	sw $5, 1040($4)
+	
+	sw $7 1536($4)
+	sw $5, 1540($4)
+	sw $7 1544($4)
+	sw $5, 1548($4)
+	sw $7 1552($4)
+
+	#addi $4, $4, 25400
+	#sw $5, 4($4)
+	#sw $5, 8($4)
+	#sw $5, 12($4)
+	#sw $5, 512($4)
+	
+	#sw $5, 520($4)
+	#sw $6, 524($4)
+	#sw $5, 528($4)
+	#sw $6, 516($4)
+	
+	#sw $5, 1024($4)
+	#sw $5, 1028($4)
+	#sw $5, 1032($4)
+	#sw $5, 1036($4)
+	#sw $5, 1040($4)
+	
+	#sw $5, 1540($4)
+	#sw $5, 1548($4)
+	
+	jr $31
+
+# ================================================
+# Timer
+timer: 
+	sw $16, 0($29)
+       	addi $29, $29, -4
+       	addi $16, $0, 200000
+forT:  
+	beq $16, $0, fimT
+       	nop
+       	nop
+       	addi $16, $16, -1      
+       	j forT                  
+fimT:  
+	addi $29, $29, 4                                                    
+       	lw $16, 0($29)          
+       	jr $31	
+	
+
+		
+	
+		
+	
+	
+	
+
+
+	
+
+
+	
