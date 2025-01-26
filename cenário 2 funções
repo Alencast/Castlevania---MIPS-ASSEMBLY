@@ -1,3 +1,4 @@
+.text
 main:
 
 
@@ -86,6 +87,10 @@ main:
 	add $5 $0 $0
 	jal funcaoLinhas2
 	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal desenharNPC
+	
 	
 	
 # Laço para geração de cenário, preencherá todos os pixels
@@ -94,9 +99,10 @@ funcaoCenario:
 	addi $20, $0, 524288 # Quantidade de pixels na tela
 Cenário: 
 	
-	beq $6, $0, fimCenário
+	beq $6, $0, fimCenário	
 	
 	sw $5, 0($4)
+	sw $5 0($22)
 	addi $6, $6, -1
 	addi $20, $20, -1
 	addi $4, $4, 4
@@ -436,8 +442,7 @@ fimChão:
 	
 
 funcaoTeto:
-	addi $22 $4 32768
-
+	
 	addi $21, $0, 1024
 	ori $5, 0xFF303030
 teto:
@@ -479,7 +484,7 @@ tijoloTet2:
 
 	beq $20, $0, fimTet2
 	
-	sw $5, 632($4) # Onde começa
+	sw $5, 2084($4) # Onde começa
 	
 	addi $20, $20, -1
 	addi $4, $4, 128 # Distância entre os pixels
@@ -550,7 +555,7 @@ funcaoTijoloChão2:
 tijoloChão2:
 	beq $20, $0, fimChão2
 	
-	sw $5, 29272($4) # Onde começa
+	sw $5, 30808($4) # Onde começa
 	
 	addi $20, $20, -1
 	addi $4, $4, 128 # Distância entre os pixels
@@ -596,7 +601,7 @@ fimLinha2:
 # Criação da Cruz
 #================================
 funcaoCruz:
-	        
+	addi $22 $4 32768
 	addi $4, $4, 10472         
 	ori $5, $0, 0xFFFFD700
 	addi $11, $0, 6    # Variável de controle da largura da torre
@@ -625,6 +630,7 @@ fimCruz1altura:
 
 #pontas da cruz
 pontasDaCruz:
+	addi $22 $4 32768
 	ori $5, $0, 0xFFFFD700
 	sw $5, 10468($4)
 	sw $5, 10496($4)
@@ -746,6 +752,7 @@ pontasDaCruz:
 #quadrado vermelho no meio da cruz
 #========================================
 quadradoCruz:
+	addi $22 $4 32768
 	
 	ori $5, $0, 0xFF0000
 
@@ -772,8 +779,9 @@ quadradoCruz:
 	sw $5, 16124($4)
 	
 	jr $31
-
-# ============================================
+	
+	
+	
 # Movimentação DO NPC
 NPC:
 	lui $4, 0x1001
@@ -824,6 +832,7 @@ DeslocEsq:
 fimDeslocEsq:
 	j NPC
 
+# =============================
 # Função que desenha a caveira
 desenharNPC:
 	ori $5, 0xffffff
@@ -876,6 +885,7 @@ desenharNPC:
 	
 	jr $31
 
+
 # ================================================
 # Timer
 timer: 
@@ -891,18 +901,4 @@ forT:
 fimT:  
 	addi $29, $29, 4                                                    
        	lw $16, 0($29)          
-       	jr $31	
-	
-
-		
-	
-		
-	
-	
-	
-
-
-	
-
-
-	
+       	jr $31
