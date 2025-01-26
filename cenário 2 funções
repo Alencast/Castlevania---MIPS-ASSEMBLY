@@ -1,4 +1,6 @@
 main:
+
+
 # Criação do Cenário 1
 #========================================
 
@@ -35,9 +37,60 @@ main:
 	lui $4, 0x1001
 	add $5 $0 $0
 	jal funcaoCruz
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal pontasDaCruz
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal quadradoCruz
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoTeto
+	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoChão
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoTijoloTeto
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoTijoloTeto2
+	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoLinha
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoLinha2
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoTijoloChão1
+
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoTijoloChão2
+	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoLinhas
+	
+	lui $4, 0x1001
+	add $5 $0 $0
+	jal funcaoLinhas2
+	
+	
 	
 # Laço para geração de cenário, preencherá todos os pixels
 funcaoCenario:	
+	addi $22 $4 32768
 	addi $20, $0, 524288 # Quantidade de pixels na tela
 Cenário: 
 	
@@ -56,6 +109,7 @@ fimCenário:
 # Criação da lava 1
 
 funcaoLava1:
+	addi $22 $4 32768
 Lava1:
 	lui $4, 0x1001
 	ori $5, 0xcb1900
@@ -90,6 +144,7 @@ fimLava1:
 
 # ================================
 funcaoDetalhesVermelhos:
+	addi $22 $4 32768
 
 DetalhesVermelho:
 	
@@ -202,6 +257,7 @@ DetalhesVermelho:
 # ==============================
 # Criação da lava 2
 funcaoLava2:
+	addi $22 $4 32768
 Lava2:
 	
 	ori $5, 0xff6300
@@ -230,6 +286,7 @@ fimLava2:
 	jr $31
 
 funcaoDetalhandoLaranja:
+	addi $22 $4 32768
 
 detalhandoLaranja:
 	ori $5, 0xff6300
@@ -267,7 +324,7 @@ detalhandoLaranja:
 	sw $5, 5432($4)
 
 	
-	jal funcaoDetalhandoLaranja
+	jr $31 
 
 
 # ==============================
@@ -275,6 +332,7 @@ detalhandoLaranja:
 
 
 Lava3:
+	addi $22 $4 32768
 	
 	ori $5, 0xffb100
 	
@@ -298,6 +356,7 @@ fimLava3:
 	jr $31
 
 detalhandoAmarelo:
+	addi $22 $4 32768
 	
 	ori $5, 0xff6300
 	
@@ -310,7 +369,7 @@ detalhandoAmarelo:
 	sw $5, 10416($4)
 	sw $5, 10928($4)
 	
-	sw $16, 12972($4)
+	sw $5, 12972($4)
 	sw $5, 12976($4)
 	
 	sw $5, 13488($4)
@@ -332,7 +391,7 @@ detalhandoAmarelo:
 	sw $5, 10544($4)
 	sw $5, 11056($4)
 
-	sw $16, 13100($4)
+	sw $5, 13100($4)
 	sw $5, 13104($4)
 
 	sw $5, 13616($4)
@@ -357,148 +416,189 @@ detalhandoAmarelo:
 	
 # Criação do Chão
 #========================================
-	lui $8, 0x1001
-	ori $14, 0xFF303030
+funcaoChão:
+	addi $22 $4 32768
+
+	
+	ori $5, 0xFF303030
 	addi $21, $0, 1024
 Chão:	
 	beq $21, $0, fimChão
 	
-	sw $14, 28672($8)
+	sw $5, 28672($4)
 	addi $21, $21, -1
-	addi $8, $8, 4
+	addi $4, $4, 4
 	j Chão
 
 fimChão:
-	lui $8, 0x1001
-	#ori $11, 0xFF303030
+	jr $31
+	
+	
+
+funcaoTeto:
+	addi $22 $4 32768
+
 	addi $21, $0, 1024
+	ori $5, 0xFF303030
 teto:
 	beq $21, $0, fimTeto
-	sw $14, 0($8)
+	sw $5, 0($4)
 	addi $21, $21, -1
-	addi $8, $8, 4
+	addi $4, $4, 4
 	j teto
 fimTeto:
+	jr $31
 
 # ================================= 
 # "Tijolos do Teto"
-
-	lui $8, 0x1001
-	ori $17, 0x7b7b7b
+funcaoTijoloTeto:
+	
+	ori $5, 0x7b7b7b
 	
 	addi $20, $0, 12 # Altura
 	
 tijoloTet1:
 	beq $20, $0, fimTet1
 	
-	sw $17, 64($8) # Onde começa
+	sw $5, 64($4) # Onde começa
 	
 	addi $20, $20, -1
-	addi $8, $8, 128 # Distância entre os pixels
+	addi $4, $4, 128 # Distância entre os pixels
 
 	j tijoloTet1
 
 fimTet1:
+	jr $31
+
+funcaoTijoloTeto2:
+
+	ori $5, 0x7b7b7b
 	addi $20, $0, 12 # Altura
 	
 tijoloTet2:
+
 	beq $20, $0, fimTet2
 	
-	sw $17, 632($8) # Onde começa
+	sw $5, 632($4) # Onde começa
 	
 	addi $20, $20, -1
-	addi $8, $8, 128 # Distância entre os pixels
+	addi $4, $4, 128 # Distância entre os pixels
 
 	j tijoloTet2
 
 fimTet2:
-	lui $8, 0x1001
+	jr $31
+
+funcaoLinha:
+	ori $5, 0x7b7b7b
 	
 	addi $20, $20, 128
 testeLin:
 	beq $20, $0, fimL1
 	
-	sw $17, 1536($8)
-	addi $8, $8, 4 
+	sw $5, 1536($4)
+	addi $4, $4, 4 
 	addi $20, $20, -1
 	j testeLin
 	
 fimL1:
-	lui $8, 0x1001
-	
+	jr $31
+
+funcaoLinha2:
+
+	ori $5, 0x7b7b7b	
 	addi $20, $20, 128
 testeLin2:
 	beq $20, $0, fimL2
 	
-	sw $17, 3584($8)
-	addi $8, $8, 4 
+	sw $5, 3584($4)
+	addi $4, $4, 4 
 	addi $20, $20, -1
 	j testeLin2
 	
 fimL2:
+	jr $31
 
 # ================================= 
 # "Tijolos do Chão"
 
-	lui $8, 0x1001
-	ori $17, 0x7b7b7b
+funcaoTijoloChão1:
+
+	
+	ori $5, 0x7b7b7b
 	
 	addi $20, $0, 12 # Altura
 	
 tijoloChão1:
 	beq $20, $0, fimChão1
 	
-	sw $17, 28736($8) # Onde começa
+	sw $5, 28736($4) # Onde começa
 	
 	addi $20, $20, -1
-	addi $8, $8, 128 # Distância entre os pixels
+	addi $4, $4, 128 # Distância entre os pixels
 
 	j tijoloChão1
 
 fimChão1:
+	jr $31
+
+funcaoTijoloChão2:
+
+	ori $5, 0x7b7b7b
 	addi $20, $0, 12 # Altura
 	
 tijoloChão2:
 	beq $20, $0, fimChão2
 	
-	sw $17, 29272($8) # Onde começa
+	sw $5, 29272($4) # Onde começa
 	
 	addi $20, $20, -1
-	addi $8, $8, 128 # Distância entre os pixels
+	addi $4, $4, 128 # Distância entre os pixels
 
 	j tijoloChão2
 
 fimChão2:
-	lui $8, 0x1001
+	jr $31
+
+funcaoLinhas:
 	
+	ori $5, 0x7b7b7b	
 	addi $20, $20, 128
 testeLinha:
 	beq $20, $0, fimLinha
 	
-	sw $17, 30208($8)
-	addi $8, $8, 4 
+	sw $5, 30208($4)
+	addi $4, $4, 4 
 	addi $20, $20, -1
 	j testeLinha
 	
 fimLinha:
-	lui $8, 0x1001
+	jr $31
+
 	
+funcaoLinhas2:
+	
+	ori $5, 0x7b7b7b
 	addi $20, $20, 128
+
 testeLinha2:
+
 	beq $20, $0, fimLinha2
 	
-	sw $17, 32256($8)
-	addi $8, $8, 4 
+	sw $5, 32256($4)
+	addi $4, $4, 4 
 	addi $20, $20, -1
 	j testeLinha2
 	
 fimLinha2:
+	jr $31
 
 # Criação da Cruz
 #================================
 funcaoCruz:
 	        
-	
+	addi $4, $4, 10472         
+	ori $5, $0, 0xFFFFD700
 	addi $11, $0, 6    # Variável de controle da largura da torre
 	addi $13, $0, 36       # Altura da torre
 
@@ -508,7 +608,7 @@ cruz1altura:
 
 cruz1largura:
 	beq $11, $0, fimCruz1largura
-	sw $12, 0($4)          # Escreve no endereço apontado por $8
+	sw $5, 0($4)          # Escreve no endereço apontado por $8
 	addi $4, $4, 4         # Avança para o próximo pixel
 	addi $11, $11, -1      # Decrementa a largura
 	j cruz1largura
@@ -521,8 +621,11 @@ fimCruz1largura:
 
 fimCruz1altura:
 
-#pontas da cruz
+	jr $31
 
+#pontas da cruz
+pontasDaCruz:
+	ori $5, $0, 0xFFFFD700
 	sw $5, 10468($4)
 	sw $5, 10496($4)
 	
@@ -642,30 +745,31 @@ fimCruz1altura:
 
 #quadrado vermelho no meio da cruz
 #========================================
-	lui $9, 0x1001
-	ori $11, 0xFF0000
+quadradoCruz:
+	
+	ori $5, $0, 0xFF0000
 
-	sw $11, 15080($9)
-	sw $11, 15084($9)
-	sw $11, 15088($9)
-	sw $11, 15092($9)
-	sw $11, 15096($9)
-	sw $11, 15100($9)
+	sw $5, 15080($4)
+	sw $5, 15084($4)
+	sw $5, 15088($4)
+	sw $5, 15092($4)
+	sw $5, 15096($4)
+	sw $5, 15100($4)
 
-	sw $11, 15592($9)
-	sw $11, 15596($9)
-	sw $11, 15600($9)
-	sw $11, 15604($9)
-	sw $11, 15608($9)
-	sw $11, 15612($9)
+	sw $5, 15592($4)
+	sw $5, 15596($4)
+	sw $5, 15600($4)
+	sw $5, 15604($4)
+	sw $5, 15608($4)
+	sw $5, 15612($4)
 
-	sw $11, 15592($9)
-	sw $11, 16104($9)
-	sw $11, 16108($9)
-	sw $11, 16112($9)
-	sw $11, 16116($9)
-	sw $11, 16120($9)
-	sw $11, 16124($9)
+	sw $5, 15592($4)
+	sw $5, 16104($4)
+	sw $5, 16108($4)
+	sw $5, 16112($4)
+	sw $5, 16116($4)
+	sw $5, 16120($4)
+	sw $5, 16124($4)
 	
 	jr $31
 
