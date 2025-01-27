@@ -1,14 +1,9 @@
 .text
 main:
 
-
-# Criação do Cenário 1
-#========================================
-
 	lui $4, 0x1001
 	ori $5, 0x270013
 	addi $6, $0, 8192 # Quantidade de pixels na tela
-	
 	jal funcaoCenario
 
 	lui $4, 0x1001
@@ -89,14 +84,14 @@ main:
 	
 	lui $4, 0x1001
 	add $5 $0 $0
-	jal desenharNPC
+	add $6, $0, $0
+	jal NPC
 	
 	
 	
 # Laço para geração de cenário, preencherá todos os pixels
 funcaoCenario:	
 	addi $22 $4 32768
-	addi $20, $0, 524288 # Quantidade de pixels na tela
 Cenário: 
 	
 	beq $6, $0, fimCenário	
@@ -104,8 +99,8 @@ Cenário:
 	sw $5, 0($4)
 	sw $5 0($22)
 	addi $6, $6, -1
-	addi $20, $20, -1
 	addi $4, $4, 4
+	addi $22, $22, 4
 	j Cenário
 	
 fimCenário:
@@ -127,7 +122,7 @@ teste:
 	beq $13, $0, fimLava1
 	beq $12, $0, fimLava1
 	
-		sw $5, 168($4)
+	sw $5, 168($4)
 	sw $5, 172($4)
 	sw $5, 176($4)
 	sw $5, 180($4)
@@ -142,6 +137,7 @@ teste:
 	addi $4, $4, 512
 	addi $11, $11, -1
 	addi $13, $13, -1
+	addi $22, $22, 4
 	j teste
 
 
@@ -258,6 +254,8 @@ DetalhesVermelho:
 	sw $5, 27452($4)
 	sw $5, 27456($4)
 	sw $5, 26940($4)	
+	
+	addi $22, $22, 4
 	jr $31
 
 # ==============================
@@ -286,6 +284,7 @@ teste2:
 	addi $4, $4, 512
 	addi $11, $11, -1
 	addi $13, $13, -1
+	addi $22, $22, 4
 	j teste2
 
 fimLava2:
@@ -329,7 +328,7 @@ detalhandoLaranja:
 	sw $5, 4920($4)
 	sw $5, 5432($4)
 
-	
+	addi $22, $22, 4
 	jr $31 
 
 
@@ -356,6 +355,7 @@ teste3:
 	addi $4, $4, 512
 	addi $11, $11, -1
 	addi $13, $13, -1
+	addi $22, $22, 4
 	j teste3
 
 fimLava3:
@@ -408,6 +408,7 @@ detalhandoAmarelo:
 	sw $5, 16176($4)
 	sw $5, 16688($4)
 	sw $5, 17200($4)
+	addi $22, $22, 4
 	jr $31
 
 
@@ -610,22 +611,26 @@ funcaoCruz:
 cruz1altura: 
 	beq $13, $0, fimCruz1altura
 	addi $11, $0, 6       # Reinicia a largura da linha
+	addi $22, $22, 4
 
 cruz1largura:
 	beq $11, $0, fimCruz1largura
 	sw $5, 0($4)          # Escreve no endereço apontado por $8
+	sw $5, 0($22)
 	addi $4, $4, 4         # Avança para o próximo pixel
 	addi $11, $11, -1      # Decrementa a largura
+	addi $22, $22, 4
 	j cruz1largura
 
 fimCruz1largura:
 	sub $4, $4, 24         # Retorna ao início da linha atual (ajustado para largura menor)
 	addi $4, $4, 512       # Salta para a próxima linha
 	addi $13, $13, -1      # Decrementa a altura
+	addi $22, $22, 4
 	j cruz1altura
 
 fimCruz1altura:
-
+	addi $22, $22, 4
 	jr $31
 
 #pontas da cruz
@@ -746,6 +751,8 @@ pontasDaCruz:
 	sw $5, 16668($4)
 	sw $5, 16672($4)
 
+	addi $22, $22, 4
+
 	
 	jr $31 
 
@@ -779,14 +786,15 @@ quadradoCruz:
 	sw $5, 16124($4)
 	
 	jr $31
-	
-	
-	
+
+# =============================================
+
+# ============================================
 # Movimentação DO NPC
 NPC:
 	lui $4, 0x1001
 	#addi $4, $4, 25404
-	addi $4, $4, 25404
+	addi $4, $4, 25444
 
 	#jal desenharNPC
 	ori $5, 0xffffff
@@ -801,7 +809,7 @@ deslocDir:
 	addi $4, $4, -4
 	jal desenharNPC
 	sw $9, 25404($4)
-	lw $25, 32768($4)
+	lw $25, 32788($4)
 	sw $25, 20($4)
 	sw $25 532($4)
 	sw $25 1044($4)
@@ -818,7 +826,7 @@ DeslocEsq:
 	#sw $25, 0($4)
 	addi $4, $4, 4
 	jal desenharNPC
-	lw $25, 32768($4)
+	lw $25, 32764($4)
 	sw $25, -4($4)
 	sw $25 508($4)
 	sw $25 1020($4)
@@ -831,7 +839,7 @@ DeslocEsq:
 
 fimDeslocEsq:
 	j NPC
-
+	
 # =============================
 # Função que desenha a caveira
 desenharNPC:
@@ -885,13 +893,17 @@ desenharNPC:
 	
 	jr $31
 
+	
+	
+
+
 
 # ================================================
 # Timer
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 200000
+       	addi $16, $0, 20000
 forT:  
 	beq $16, $0, fimT
        	nop
