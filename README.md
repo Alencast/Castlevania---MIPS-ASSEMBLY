@@ -25,12 +25,15 @@ Nessa etapa precisamos implementar algumas mecânicas: Geração de personagem e
 
 ### Coisas a fazer:
 1. Desenhar o NPC: Ok
-2. Desenhar o Jogador:
+2. Desenhar o Jogador: Ok
 3. Movimentação NPC: Ok
-4. Movimentação Jogador:
-5. Mecânica de ataque:
-6. Mecânica de PERDEU/Dano:
+
 
 ## Etapa 3 - BOSS FIGHT
-1. Desenhar o boss final:
-2. Desenhar animação final do game:
+1. Movimentação Jogador:
+2. Mecânica de ataque:
+3. Mecânica de PERDEU/Dano:
+4. Desenhar o boss final:
+5. Desenhar animação final do game:
+
+6. Colocar música, se der:
