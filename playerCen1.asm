@@ -49,11 +49,11 @@ main:
 	add $5 $0 $0
 	jal portao
 	
-	lui $4, 0x1001
-	add $5 $0 $0
-	add $6, $0, $0
-	add $7 $0 $0
-	jal NPC
+	#lui $4, 0x1001
+	#add $5 $0 $0
+	#add $6, $0, $0
+	#add $7 $0 $0
+	#jal NPC
 	
 	#lui $4, 0x1001
 	#add $5 $0 $0
@@ -69,6 +69,10 @@ main:
 	#add $6 $0 $0
 	#add $7 $0 $0
 	#jal desenharNPC
+	
+	lui $4, 0x1001
+	add $5, $0 $0
+	jal player
 
 	addi $2, $0, 10
 	syscall
@@ -740,20 +744,68 @@ desenharBelmont:
 	
 # ===============================================
 player:
-	addi $10, $0, 128
-	lui $21, # registrador do player
-	# n esqueça
-	addi $10, $0, 0
-	addi $11, $0, 'a'
-	addi $12, $0, 'd'
-	addi $13, $0, 's'
-	addi $14, $0, 'w'
-laço:
-	sw $20, 0($9) # possivel jal
-	lw # carregar
-	sw #andar
+	ori $16, 0xffffff
+      addi $6, $0, 1024
+      lui $17, 0xffff
+      addi $20, $0, 32
+      addi $6, $0, 4
+      addi $7, $0, 'a'
+      addi $8, $0, 'd'
+      addi $9, $0, 's'
+      addi $10, $0, 'w'
+      
+for2:       
+	sw $16 0($4)
+	lw $5 32768($4)
+	sw $5 4($4)
 	
-	lw $22, 0($21)
+      lw $18, 0($17)
+      beq $18, $0, cont
+      lw $19, 4($17)
+      
+      beq $19, $20, fim
+      beq $19, $7, esq
+      beq $19, $8, dir
+      beq $19, $9, baixo
+      beq $19, $10, cima
+     
+      j cont
+esq:  
+	addi $4 $4 -4
+	sw $16 0($4)
+	lw $5 32768($4)
+	sw $5 4($4)
+	jal timer 
+      
+      j cont
+     
+dir:	addi $4 $4 4
+	sw $16 0($4)
+	lw $5 32768($4)
+	sw $5 -4($4)
+	jal timer
+      j cont  
+     
+baixo:  
+addi $4 $4 512
+	sw $16 0($4)
+	lw $5 32768($4)
+	sw $5 -512($4)
+	jal timer
+      j cont
+     
+cima:  
+addi $4 $4 -512
+	sw $16 0($4)
+	lw $5 32768($4)
+	sw $5 512($4)
+	jal timer
+      j cont
+                 
+cont: j for2
+fim:  
+	jr $31
+ 
 	
 
 
@@ -891,7 +943,7 @@ desenharNPC:
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 200000
+       	addi $16, $0, 20000
 forT:  
 	beq $16, $0, fimT
        	nop
