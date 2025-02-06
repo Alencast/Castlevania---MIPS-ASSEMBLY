@@ -71,7 +71,9 @@ main:
 	#jal desenharNPC
 	
 	lui $4, 0x1001
-	add $5, $0 $0
+	addi $4 $4 13312
+	add $16, $0 $0
+	jal desenharBelmont
 	jal player
 
 	addi $2, $0, 10
@@ -683,82 +685,165 @@ portao:
 # ================================================
 # Desenhando o Richter Belmont
 desenharBelmont:
+	sw $5, 0($29)
+       addi $29, $29, -4
+       sw $6, 0($29)
+       addi $29, $29, -4
+       sw $7, 0($29)
+       addi $29, $29, -4
+       sw $8, 0($29)
+       addi $29, $29, -4
+       sw $9, 0($29)
+       addi $29, $29, -4
+       sw $10, 0($29)
+       addi $29, $29, -4
+       sw $22, 0($29)
+       addi $29, $29, -4
+       sw $23, 0($29)
+       addi $29, $29, -4
+       sw $24, 0($29)
+       addi $29, $29, -4
+       sw $25, 0($29)
+       addi $29, $29, -4
+       
+	ori $25 $0 0xff00ff
+	li $22 9
+laco_desenharBelmont_1:
+	li $23 6
+laco_desenharBelmont_2:
+	sw $25 0($4)
+
+	addi $4 $4 4
+	addi $23 $23 -1
+	bnez $23 laco_desenharBelmont_2
 	
-	ori $5, 0xFFFFFFF
-	ori $6, 0x3E2B1F
-	ori $7, 0xF1C27D
-	ori $8, 0x0000CD 
-	ori $9, 0x505050
-	ori $10,0x7d3100
+	addi $4 $4 -24
+	addi $4 $4 512
+	add $22 $22 -1
+	bnez $22 laco_desenharBelmont_1
+	
+	addi $4 $4 -4608
+	
+	ori $5 $0 0xFFFFFFF
+	ori $6 $0 0x3E2B1F
+	ori $7 $0 0xF1C27D
+	ori $8 $0 0x0000CD 
+	ori $9 $0 0x505050
+	ori $10 $0 0x7d3100
+	
 	# cabelo
-	sw $6, 13320($4)
-	sw $6, 13324($4)
-	sw $6, 13328($4)
-	sw $6, 14340($4)
+	sw $6, 1028($4)
+	sw $6, 8($4)
+	sw $6, 12($4)
+	sw $6, 16($4)
 
 	# faixa de cabeça
-	sw $5, 14336($4)
-	sw $5, 13828($4)
-	sw $5, 13832($4)
-	sw $5, 13836($4)
-	sw $5, 13840($4)
+	sw $5, 1024($4)
+	sw $5, 516($4)
+	sw $5, 520($4)
+	sw $5, 524($4)
+	sw $5, 528($4)
 
 	# pele
-	sw $7, 14344($4)
-	sw $7, 14348($4)
-	sw $7, 14352($4)
-	sw $7, 15364($4)
-	sw $7, 15876($4)
-	sw $7, 15880($4)
-	sw $7, 15888($4)
-	sw $7, 15376($4)
-	sw $7, 15892($4)
+	sw $7, 1032($4)
+	sw $7, 1036($4)
+	sw $7, 1040($4)
+	sw $7, 2052($4)
+	sw $7, 2564($4)
+	sw $7, 2568($4)
+	sw $7, 2064($4)
+	sw $7, 2576($4)
+	sw $7, 2580($4)
 
 	# camisa
-	sw $8, 14852($4)
-	sw $8, 14856($4)
-	sw $8, 14860($4)
-	sw $8, 14864($4)
-	sw $8, 15368($4)
-	sw $8, 15372($4)
-	sw $8, 15884($4)
-	sw $8, 16388($4)
-	sw $8, 16384($4)
-	sw $8, 16896($4)
+	#sw $8, 1540($4)
+	sw $8, 1540($4)
+	sw $8, 1544($4)
+	sw $8, 1544($4)
+	sw $8, 1548($4)
+	sw $8, 1552($4)
+	
+	sw $8, 2056($4)
+	sw $8, 2060($4)
+	sw $8, 2572($4)
+	
+	#sw $8, 16388($4)
+	#sw $8, 16384($4)
+	#sw $8, 16896($4)
 
 	# calça
-	sw $9, 16392($4)
-	sw $9, 16396($4)
-	sw $9, 16400($4)
-	sw $9, 16904($4)
-	sw $9, 16400($4)
-	sw $9, 16400($4)
-	sw $9, 16912($4)
+	sw $8, 3072($4)
+	sw $8, 3584($4)
+	sw $8, 3076($4)
+	
+	sw $9, 3080($4)
+	sw $9, 3084($4)
+	sw $9, 3088($4)
+	
+	sw $9, 3592($4)
+	sw $9, 3600($4)
 	
 	#sapatos
-	sw $10, 17424($4)
-	sw $10, 17428($4)
-	sw $10, 17416($4)
+	sw $10, 4104($4)
+	sw $10, 4112($4)
+	sw $10, 4116($4)
+	
+	ori $25 $0 0xff00ff
+	li $22 9
+laco_desenharBelmont_3:
+	li $23 6
+laco_desenharBelmont_4:
+	lw $24 0($4)
+	bne $24 $25 continuacao_desenharBelmont
+	
+	lw $24 32768($4)
+	sw $24 0($4)
+	
+continuacao_desenharBelmont:
+	addi $4 $4 4
+	addi $23 $23 -1
+	bnez $23 laco_desenharBelmont_4
+	
+	addi $4 $4 -24
+	addi $4 $4 512
+	add $22 $22 -1
+	bnez $22 laco_desenharBelmont_3
+	
+	addi $4 $4 -4608
+
+	addi $29, $29, 4                                                    
+       lw $25, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $24, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $23, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $22, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $10, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $9, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $8, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $7, 0($29) 
+	addi $29, $29, 4                                                    
+       lw $6, 0($29) 
+       addi $29, $29, 4                                                    
+       lw $5, 0($29) 
 
 	jr $31
 	
 # ===============================================
 player:
-	ori $16, 0xffffff
-      addi $6, $0, 1024
       lui $17, 0xffff
       addi $20, $0, 32
-      addi $6, $0, 4
       addi $7, $0, 'a'
       addi $8, $0, 'd'
       addi $9, $0, 's'
       addi $10, $0, 'w'
       
-for2:       
-	sw $16 0($4)
-	lw $5 32768($4)
-	sw $5 4($4)
-	
+for2:       	
       lw $18, 0($17)
       beq $18, $0, cont
       lw $19, 4($17)
@@ -779,10 +864,26 @@ esq:
       
       j cont
      
-dir:	addi $4 $4 4
-	sw $16 0($4)
-	lw $5 32768($4)
-	sw $5 -4($4)
+dir:	addi $4 $4 8 # pode mudar
+	jal desenharBelmont
+	
+	addi $24 $4 -8 # pode mudar
+	li $22 9 # pode mudar
+laco_dir_1:
+	li $23 2 # pode mudar
+laco_dir_2:
+	lw $25 32768($24)
+	sw $25 0($24)
+
+	addi $24 $24 4
+	addi $23 $23 -1
+	bnez $23 laco_dir_2
+	
+	addi $24 $24 -8 # pode mudar
+	addi $24 $24 512
+	add $22 $22 -1
+	bnez $22 laco_dir_1
+	
 	jal timer
       j cont  
      
@@ -943,7 +1044,7 @@ desenharNPC:
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 20000
+       	addi $16, $0, 1000
 forT:  
 	beq $16, $0, fimT
        	nop
