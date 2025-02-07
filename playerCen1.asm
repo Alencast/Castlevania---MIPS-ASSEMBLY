@@ -856,13 +856,28 @@ for2:
      
       j cont
 esq:  
-	addi $4 $4 -4
-	sw $16 0($4)
-	lw $5 32768($4)
-	sw $5 4($4)
-	jal timer 
-      
-      j cont
+	addi $4 $4 -8 # pode mudar
+	jal desenharBelmont
+	
+	addi $24 $4 24 # pode mudar
+	li $22 9 # pode mudar
+laco_esq_1:
+	li $23 2 # pode mudar
+laco_esq_2:
+	lw $25 32768($24)
+	sw $25 0($24)
+
+	addi $24 $24 4
+	addi $23 $23 -1
+	bnez $23 laco_esq_2
+	
+	addi $24 $24 -8 # pode mudar
+	addi $24 $24 512
+	add $22 $22 -1
+	bnez $22 laco_esq_1
+	
+	jal timer
+      j cont  
      
 dir:	addi $4 $4 8 # pode mudar
 	jal desenharBelmont
@@ -888,18 +903,50 @@ laco_dir_2:
       j cont  
      
 baixo:  
-addi $4 $4 512
-	sw $16 0($4)
-	lw $5 32768($4)
-	sw $5 -512($4)
+	addi $4 $4 512 # pode mudar
+	jal desenharBelmont
+	
+	addi $24 $4 -512 # pode mudar
+	li $22 2 # pode mudar
+laco_baixo_1:
+	li $23 7 # pode mudar
+laco_baixo_2:
+	lw $25 32768($24)
+	sw $25 0($24)
+
+	addi $24 $24 4
+	addi $23 $23 -1
+	bnez $23 laco_baixo_2
+	
+	addi $24 $24 -36 # pode mudar
+	addi $24 $24 512
+	add $22 $22 -1
+	bnez $22 laco_baixo_1
+	
 	jal timer
       j cont
      
 cima:  
-addi $4 $4 -512
-	sw $16 0($4)
-	lw $5 32768($4)
-	sw $5 512($4)
+	addi $4 $4 -1024 # pode mudar
+	jal desenharBelmont
+	
+	addi $24 $4 4608 # pode mudar
+	li $22 2 # pode mudar
+laco_cima_1:
+	li $23 7 # pode mudar
+laco_cima_2:
+	lw $25 32768($24)
+	sw $25 0($24)
+
+	addi $24 $24 4
+	addi $23 $23 -1
+	bnez $23 laco_cima_2
+	
+	addi $24 $24 -28 # pode mudar
+	addi $24 $24 512
+	add $22 $22 -1
+	bnez $22 laco_cima_1
+	
 	jal timer
       j cont
                  
