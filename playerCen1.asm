@@ -840,7 +840,7 @@ player:
       addi $20, $0, 32
       addi $7, $0, 'a'
       addi $8, $0, 'd'
-      addi $9, $0, 's'
+      #addi $9, $0, 's'
       addi $10, $0, 'w'
       
 for2:       	
@@ -851,7 +851,7 @@ for2:
       beq $19, $20, fim
       beq $19, $7, esq
       beq $19, $8, dir
-      beq $19, $9, baixo
+      #beq $19, $9, baixo
       beq $19, $10, cima
      
       j cont
@@ -879,7 +879,8 @@ laco_esq_2:
 	jal timer
       j cont  
      
-dir:	addi $4 $4 8 # pode mudar
+dir:	
+	addi $4 $4 8 # pode mudar
 	jal desenharBelmont
 	
 	addi $24 $4 -8 # pode mudar
@@ -901,37 +902,13 @@ laco_dir_2:
 	
 	jal timer
       j cont  
-     
-baixo:  
-	addi $4 $4 512 # pode mudar
-	jal desenharBelmont
-	
-	addi $24 $4 -512 # pode mudar
-	li $22 2 # pode mudar
-laco_baixo_1:
-	li $23 7 # pode mudar
-laco_baixo_2:
-	lw $25 32768($24)
-	sw $25 0($24)
-
-	addi $24 $24 4
-	addi $23 $23 -1
-	bnez $23 laco_baixo_2
-	
-	addi $24 $24 -36 # pode mudar
-	addi $24 $24 512
-	add $22 $22 -1
-	bnez $22 laco_baixo_1
-	
-	jal timer
-      j cont
-     
+      
 cima:  
-	addi $4 $4 -1024 # pode mudar
+	addi $4 $4 -4096 # pode mudar
 	jal desenharBelmont
 	
 	addi $24 $4 4608 # pode mudar
-	li $22 2 # pode mudar
+	li $22 8 # pode mudar
 laco_cima_1:
 	li $23 7 # pode mudar
 laco_cima_2:
@@ -946,9 +923,59 @@ laco_cima_2:
 	addi $24 $24 512
 	add $22 $22 -1
 	bnez $22 laco_cima_1
-	
+
 	jal timer
-      j cont
+
+	addi $27, $0, 2	
+baixo:  
+	beq $27, $0, cont
+	
+	addi $4 $4 2048 # pode mudar
+	jal desenharBelmont
+	
+	addi $24 $4 -2048 # pode mudar
+	li $22 4 # pode mudar
+laco_baixo_1:
+	li $23 7 # pode mudar
+laco_baixo_2:
+	lw $25 32768($24)
+	sw $25 0($24)
+
+	addi $24 $24 4
+	addi $23 $23 -1
+	bnez $23 laco_baixo_2
+	
+	addi $24 $24 -28 # pode mudar
+	addi $24 $24 512
+	add $22 $22 -1
+	bnez $22 laco_baixo_1
+	
+	addi $27, $27, -1
+      j baixo
+     
+#baixo:  
+#	addi $4 $4 512 # pode mudar
+#	jal desenharBelmont
+	
+#	addi $24 $4 -512 # pode mudar
+#	li $22 2 # pode mudar
+#laco_baixo_1:
+#	li $23 7 # pode mudar
+#laco_baixo_2:
+#	lw $25 32768($24)
+#	sw $25 0($24)
+
+#	addi $24 $24 4
+#	addi $23 $23 -1
+#	bnez $23 laco_baixo_2
+	
+#	addi $24 $24 -36 # pode mudar
+#	addi $24 $24 512
+#	add $22 $22 -1
+#	bnez $22 laco_baixo_1
+	
+#	jal timer
+#      j cont
                  
 cont: j for2
 fim:  
@@ -1091,7 +1118,7 @@ desenharNPC:
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 1000
+       	addi $16, $0, 100000
 forT:  
 	beq $16, $0, fimT
        	nop
