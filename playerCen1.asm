@@ -68,7 +68,7 @@ main:
 	#add $5 $0 $0
 	#add $6 $0 $0
 	#add $7 $0 $0
-	#jal desenharNPC
+	#jal NPC
 	
 	lui $4, 0x1001
 	addi $4 $4 13312
