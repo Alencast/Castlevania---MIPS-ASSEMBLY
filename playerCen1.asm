@@ -23,11 +23,13 @@ main:
 	
 	lui $4, 0x1001
 	add $5 $0 $0
+	add $6, $0, $0
+	add $7, $0, $0
 	jal castelo
 	
-	lui $4, 0x1001
-	add $5 $0 $0
-	jal escadaria
+	#lui $4, 0x1001
+	#add $5 $0 $0
+	#jal escadaria
 	
 	lui $4, 0x1001
 	add $5 $0 $0
@@ -71,7 +73,7 @@ main:
 	#jal NPC
 	
 	lui $4, 0x1001
-	addi $4 $4 13312
+	addi $4 $4 24068
 	add $16, $0 $0
 	jal desenharBelmont
 	jal player
@@ -116,27 +118,27 @@ Estrelas:
 	sw $5, 12108($4)
 	sw $5, 13300($4)
 	sw $5, 17020($4)
-	sw $5, 17840($4)
+	sw $5, 14264($4)
 	sw $5, 17720($4)
 	sw $5, 20720($4)
 	sw $5, 22060($4)
 	
-	sw $5, 2700($4)
-	sw $5, 2920($4)
-	sw $5, 3004($4)
-	sw $5, 4380($4)
-	sw $5, 5328($4)
-	sw $5, 7720($4)
-	sw $5, 8680($4)
-	sw $5, 11200($4)
-	sw $5, 12020($4)
-	sw $5, 12108($4)
-	sw $5, 13300($4)
-	sw $5, 17020($4)
-	sw $5, 17840($4)
-	sw $5, 17720($4)
-	sw $5, 20720($4)
-	sw $5, 22060($4)
+	#sw $5, 2700($4)
+	#sw $5, 2920($4)
+	#sw $5, 3004($4)
+	#sw $5, 4380($4)
+	#sw $5, 5328($4)
+	#sw $5, 7720($4)
+	#sw $5, 8680($4)
+	#sw $5, 11200($4)
+	#sw $5, 12020($4)
+	#sw $5, 12108($4)
+	#sw $5, 13300($4)
+	##sw $5, 17020($4)
+	#sw $5, 17840($4)
+	#sw $5, 17720($4)
+	#sw $5, 20720($4)
+	#sw $5, 22060($4)
 fimEstrela:
 	jr $31
 	
@@ -468,12 +470,12 @@ castelo:
 	# Endereço base do bitmap display
 	addi $4, $4, 17840     # Define o deslocamento inicial da torre
 	ori $5, $0, 0xFF707070  # Define a cor cinza escuro
-	addi $11, $0, 24   # Variável de controle da largura da torre
+	addi $11, $0, 20   # Variável de controle da largura da torre
 	addi $12, $0, 22      # Altura da torre 17840
 
 torre2altura: 
 	beq $12, $0, fimTorre2altura
-	addi $11, $0, 24   # Reinicia a largura da linha
+	addi $11, $0, 20   # Reinicia a largura da linha
 
 torre2largura:
 	beq $11, $0, fimTorre2largura
@@ -483,12 +485,17 @@ torre2largura:
 	j torre2largura
 
 fimTorre2largura:
-	sub $4, $4, 96         # Retorna ao início da linha atual
+	sub $4, $4, 80         # Retorna ao início da linha atual
 	addi $4, $4, 512       # Salta para a próxima linha
 	addi $12, $12, -1      # Decrementa a altura
 	j torre2altura
 
 fimTorre2altura:
+	jr $31
+	
+
+
+fimCastelo:
 	jr $31
 	
 # ====================================
@@ -851,7 +858,7 @@ for2:
       beq $19, $20, fim
       beq $19, $7, esq
       beq $19, $8, dir
-      #beq $19, $9, baixo
+      #beq $19, $9, baixo2
       beq $19, $10, cima
      
       j cont
@@ -924,7 +931,7 @@ laco_cima_2:
 	add $22 $22 -1
 	bnez $22 laco_cima_1
 
-	jal timer
+	jal timerPulo
 
 	addi $27, $0, 2	
 baixo:  
@@ -952,30 +959,6 @@ laco_baixo_2:
 	
 	addi $27, $27, -1
       j baixo
-     
-#baixo:  
-#	addi $4 $4 512 # pode mudar
-#	jal desenharBelmont
-	
-#	addi $24 $4 -512 # pode mudar
-#	li $22 2 # pode mudar
-#laco_baixo_1:
-#	li $23 7 # pode mudar
-#laco_baixo_2:
-#	lw $25 32768($24)
-#	sw $25 0($24)
-
-#	addi $24 $24 4
-#	addi $23 $23 -1
-#	bnez $23 laco_baixo_2
-	
-#	addi $24 $24 -36 # pode mudar
-#	addi $24 $24 512
-#	add $22 $22 -1
-#	bnez $22 laco_baixo_1
-	
-#	jal timer
-#      j cont
                  
 cont: j for2
 fim:  
@@ -1118,7 +1101,7 @@ desenharNPC:
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 100000
+       	addi $16, $0, 1000
 forT:  
 	beq $16, $0, fimT
        	nop
@@ -1126,6 +1109,23 @@ forT:
        	addi $16, $16, -1      
        	j forT                  
 fimT:  
+	addi $29, $29, 4                                                    
+       	lw $16, 0($29)          
+       	jr $31
+       	
+# ================================================
+# Timer
+timerPulo: 
+	sw $16, 0($29)
+       	addi $29, $29, -4
+       	addi $16, $0, 125000
+forT2:  
+	beq $16, $0, fimT2
+       	nop
+       	nop
+       	addi $16, $16, -1      
+       	j forT2                  
+fimT2:  
 	addi $29, $29, 4                                                    
        	lw $16, 0($29)          
        	jr $31
