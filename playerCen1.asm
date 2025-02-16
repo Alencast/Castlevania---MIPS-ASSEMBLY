@@ -77,10 +77,14 @@ main:
 	#add $7 $0 $0
 	#jal NPC
 	
-	lui $4, 0x1001
-	addi $4 $4 24068
+	lui $3, 0x1001
+	addi $3 $3 24068
 	add $16, $0 $0
 	jal desenharBelmont
+	
+	lui $14 0x1001
+	addi $14 $14 25404
+	jal desenharNPC
 	jal player
 
 	addi $2, $0, 10
@@ -748,43 +752,43 @@ fimPortao:
 # Desenhando o Richter Belmont
 desenharBelmont:
 	sw $5, 0($29)
-       addi $29, $29, -4
-       sw $6, 0($29)
-       addi $29, $29, -4
-       sw $7, 0($29)
-       addi $29, $29, -4
-       sw $8, 0($29)
-       addi $29, $29, -4
-       sw $9, 0($29)
-       addi $29, $29, -4
-       sw $10, 0($29)
-       addi $29, $29, -4
-       sw $22, 0($29)
-       addi $29, $29, -4
-       sw $23, 0($29)
-       addi $29, $29, -4
-       sw $24, 0($29)
-       addi $29, $29, -4
-       sw $25, 0($29)
-       addi $29, $29, -4
-       
+	addi $29, $29, -4
+	sw $6, 0($29)
+	addi $29, $29, -4
+	sw $7, 0($29)
+	addi $29, $29, -4
+	sw $8, 0($29)
+	addi $29, $29, -4
+	sw $9, 0($29)
+	addi $29, $29, -4
+	sw $10, 0($29)
+	addi $29, $29, -4
+	sw $22, 0($29)
+	addi $29, $29, -4
+	sw $23, 0($29)
+	addi $29, $29, -4
+	sw $24, 0($29)
+	addi $29, $29, -4
+	sw $25, 0($29)
+	addi $29, $29, -4
+	
 	ori $25 $0 0xff00ff
 	li $22 9
 laco_desenharBelmont_1:
 	li $23 6
 laco_desenharBelmont_2:
-	sw $25 0($4)
+	sw $25 0($3)
 
-	addi $4 $4 4
+	addi $3 $3 4
 	addi $23 $23 -1
 	bnez $23 laco_desenharBelmont_2
 	
-	addi $4 $4 -24
-	addi $4 $4 512
+	addi $3 $3 -24
+	addi $3 $3 512
 	add $22 $22 -1
 	bnez $22 laco_desenharBelmont_1
 	
-	addi $4 $4 -4608
+	addi $3 $3 -4608
 	
 	ori $5 $0 0xFFFFFFF
 	ori $6 $0 0x3E2B1F
@@ -794,107 +798,103 @@ laco_desenharBelmont_2:
 	ori $10 $0 0x7d3100
 	
 	# cabelo
-	sw $6, 1028($4)
-	sw $6, 8($4)
-	sw $6, 12($4)
-	sw $6, 16($4)
+	sw $6, 1028($3)
+	sw $6, 8($3)
+	sw $6, 12($3)
+	sw $6, 16($3)
 
-	# faixa de cabeça
-	sw $5, 1024($4)
-	sw $5, 516($4)
-	sw $5, 520($4)
-	sw $5, 524($4)
-	sw $5, 528($4)
+	# faixa de cabeca
+	sw $5, 1024($3)
+	sw $5, 516($3)
+	sw $5, 520($3)
+	sw $5, 524($3)
+	sw $5, 528($3)
 
 	# pele
-	sw $7, 1032($4)
-	sw $7, 1036($4)
-	sw $7, 1040($4)
-	sw $7, 2052($4)
-	sw $7, 2564($4)
-	sw $7, 2568($4)
-	sw $7, 2064($4)
-	sw $7, 2576($4)
-	sw $7, 2580($4)
+	sw $7, 1032($3)
+	sw $7, 1036($3)
+	sw $7, 1040($3)
+	sw $7, 2052($3)
+	sw $7, 2564($3)
+	sw $7, 2568($3)
+	sw $7, 2064($3)
+	sw $7, 2576($3)
+	sw $7, 2580($3)
 
 	# camisa
-	#sw $8, 1540($4)
-	sw $8, 1540($4)
-	sw $8, 1544($4)
-	sw $8, 1544($4)
-	sw $8, 1548($4)
-	sw $8, 1552($4)
+	sw $8, 1540($3)
+	sw $8, 1544($3)
+	sw $8, 1544($3)
+	sw $8, 1548($3)
+	sw $8, 1552($3)
 	
-	sw $8, 2056($4)
-	sw $8, 2060($4)
-	sw $8, 2572($4)
-	
-	#sw $8, 16388($4)
-	#sw $8, 16384($4)
-	#sw $8, 16896($4)
+	sw $8, 2056($3)
+	sw $8, 2060($3)
+	sw $8, 2572($3)
 
-	# calça
-	sw $8, 3072($4)
-	sw $8, 3584($4)
-	sw $8, 3076($4)
+	# calca
+	sw $8, 3072($3)
+	sw $8, 3584($3)
+	sw $8, 3076($3)
 	
-	sw $9, 3080($4)
-	sw $9, 3084($4)
-	sw $9, 3088($4)
+	sw $9, 3080($3)
+	sw $9, 3084($3)
+	sw $9, 3088($3)
 	
-	sw $9, 3592($4)
-	sw $9, 3600($4)
+	sw $9, 3592($3)
+	sw $9, 3600($3)
 	
-	#sapatos
-	sw $10, 4104($4)
-	sw $10, 4112($4)
-	sw $10, 4116($4)
+	# sapatos
+	sw $10, 4104($3)
+	sw $10, 4112($3)
+	sw $10, 4116($3)
 	
 	ori $25 $0 0xff00ff
 	li $22 9
 laco_desenharBelmont_3:
 	li $23 6
 laco_desenharBelmont_4:
-	lw $24 0($4)
+	lw $24 0($3)
 	bne $24 $25 continuacao_desenharBelmont
 	
-	lw $24 32768($4)
-	sw $24 0($4)
+	lw $24 32768($3)
+	sw $24 0($3)
 	
 continuacao_desenharBelmont:
-	addi $4 $4 4
+	addi $3 $3 4
 	addi $23 $23 -1
 	bnez $23 laco_desenharBelmont_4
 	
-	addi $4 $4 -24
-	addi $4 $4 512
+	addi $3 $3 -24
+	addi $3 $3 512
 	add $22 $22 -1
 	bnez $22 laco_desenharBelmont_3
 	
-	addi $4 $4 -4608
+	addi $3 $3 -4608
 
-	addi $29, $29, 4                                                    
-       lw $25, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $24, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $23, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $22, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $10, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $9, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $8, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $7, 0($29) 
-	addi $29, $29, 4                                                    
-       lw $6, 0($29) 
-       addi $29, $29, 4                                                    
-       lw $5, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $25, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $24, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $23, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $22, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $10, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $9, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $8, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $7, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $6, 0($29) 
+	addi $29, $29, 4                                                     
+	lw $5, 0($29) 
 
 	jr $31
+
 	
 # ===============================================
 player:
@@ -918,10 +918,10 @@ for2:
      
       j cont
 esq:  
-	addi $4 $4 -8 # pode mudar
+	addi $3 $3 -8 # pode mudar
 	jal desenharBelmont
 	
-	addi $24 $4 24 # pode mudar
+	addi $24 $3 24 # pode mudar
 	li $22 9 # pode mudar
 laco_esq_1:
 	li $23 2 # pode mudar
@@ -942,10 +942,10 @@ laco_esq_2:
       j cont  
      
 dir:	
-	addi $4 $4 8 # pode mudar
+	addi $3 $3 8 # pode mudar
 	jal desenharBelmont
 	
-	addi $24 $4 -8 # pode mudar
+	addi $24 $3 -8 # pode mudar
 	li $22 9 # pode mudar
 laco_dir_1:
 	li $23 2 # pode mudar
@@ -966,10 +966,10 @@ laco_dir_2:
       j cont  
       
 cima:  
-	addi $4 $4 -4096 # pode mudar
+	addi $3 $3 -4096 # pode mudar
 	jal desenharBelmont
 	
-	addi $24 $4 4608 # pode mudar
+	addi $24 $3 4608 # pode mudar
 	li $22 8 # pode mudar
 laco_cima_1:
 	li $23 7 # pode mudar
@@ -992,7 +992,7 @@ laco_cima_2:
 baixo:  
 	beq $27, $0, cont
 	
-	addi $4 $4 2048 # pode mudar
+	addi $3 $3 2048 # pode mudar
 	jal desenharBelmont
 	
 	addi $24 $4 -2048 # pode mudar
@@ -1015,140 +1015,187 @@ laco_baixo_2:
 	addi $27, $27, -1
       j baixo
                  
-cont: j for2
+cont: 
+	add $4 $21 $0
+	jal andar_npc
+	add $21 $2 $0
+	
+	j for2
 fim:  
 	jr $31
- 
-	
 
-
-
-# ============================================
-# Fazendo o primeiro NPC
-
-#desenharNPC:
-#	ori $5, 0xffffff
-#	ori $6, 0x3cc28a
-
-	#sw $6, 24892($4)
-	#sw $6, 24896($4)
-	#sw $6, 24384($4)
-	#sw $6, 24388($4)
-
-	#sw $6, 25416($4)
-	#sw $6, 25420($4)
-	#sw $6, 24908($4)
-	#sw $6, 24912($4)
-
-	#sw $6, 26952($4)
-	#sw $6, 26956($4)
-	#sw $6, 26960($4)
-	#sw $6, 26448($4)
-	#sw $6, 26452($4)
-
-# ============================================
-# Movimentação DO NPC
 NPC:
-	lui $4, 0x1001
-	#addi $4, $4, 25404
-	addi $4, $4, 25404
+	#lui $14, 0x1001   # Substituindo $4 -> $14
+	#addi $14, $14, 25404
 
-	#jal desenharNPC
-	ori $5, 0xffffff
-	sw $5, 0($4)
-	addi $12, $0, 34
+	#ori $15, 0xffffff  # Substituindo $5 -> $15
+	#sw $15, 0($14)
+	#addi $28, $0, 34   # Substituindo $12 -> $28
 	
 deslocDir:
-	beq $12, $0, fimDeslocDir
-	sw $5, -4($4)
-	#lw $25, 32768($4)
-	#sw $25, 0($4)
-	addi $4, $4, -4
-	jal desenharNPC
-	sw $9, 25404($4)
-	lw $25, 32768($4)
-	sw $25, 20($4)
-	sw $25 532($4)
-	sw $25 1044($4)
-	sw $25 1556($4)
-	jal timer
-	addi $12, $12, -1
-	j deslocDir
-fimDeslocDir:
-	addi $12, $0, 34
-DeslocEsq:
-	beq $12, $0, fimDeslocEsq
-	sw $5, 4($4)
-	#lw $25, 32768($4)
-	#sw $25, 0($4)
-	addi $4, $4, 4
-	jal desenharNPC
-	lw $25, 32768($4)
-	sw $25, -4($4)
-	sw $25 508($4)
-	sw $25 1020($4)
-	sw $25 1532($4)
-	sw $9, 25404($4)
-	jal timer
+	#beq $28, $0, fimDeslocDir
+	#sw $15, -4($14)
+	#addi $14, $14, -4
+	#jal desenharNPC
+	#sw $26, 25404($14)  # Substituindo $9 -> $26
+	#lw $30, 32768($14)  # Substituindo $25 -> $30
+	#sw $30, 20($14)
+	#sw $30, 532($14)
+	#sw $30, 1044($14)
+	#sw $30, 1556($14)
+	#jal timer
+	#addi $28, $28, -1
+	#j deslocDir
 	
-	addi $12, $12, -1
-	j DeslocEsq
+fimDeslocDir:
+	#addi $28, $0, 34
+	
+DeslocEsq:
+	#beq $28, $0, fimDeslocEsq
+	#sw $15, 4($14)
+	#addi $14, $14, 4
+	#jal desenharNPC
+	#lw $30, 32768($14)
+	#sw $30, -4($14)
+	#sw $30, 508($14)
+	#sw $30, 1020($14)
+	#sw $30, 1532($14)
+	#sw $26, 25404($14)
+	#jal timer
+	
+	#addi $28, $28, -1
+	#j DeslocEsq
 
 fimDeslocEsq:
-	j NPC
+	#j NPC
 	
-# =============================
-# Função que desenha a caveira
-desenharNPC:
-	ori $5, 0xffffff
-	ori $6, 0x000000
-	ori $7, 0x270013
-	
-	sw $7 0($4)
-	sw $5, 4($4)
-	sw $5, 8($4)
-	sw $5, 12($4)
-	sw $7 16($4)
-	
-	sw $5, 512($4)
-	sw $6, 516($4)
-	sw $5, 520($4)
-	sw $6, 524($4)
-	sw $5 528($4)
+# registador de entrada: $4 quantas vezes o npc andou	
+andar_npc: 
+	sw $31 0($29)
+       	addi $29 $29 -4
+	sw $8 0($29)
+       	addi $29 $29 -4
+       	sw $9 0($29)
+       	addi $29 $29 -4
+       	sw $10 0($29)
+       	addi $29 $29 -4
 
-	sw $5, 1024($4)
-	sw $5, 1028($4)
-	sw $5, 1032($4)
-	sw $5, 1036($4)
-	sw $5, 1040($4)
+	addi $8 $0 68
+	div $4 $8
+	mfhi $9
+	addi $8 $0 34
+	slt $9 $9 $8
+	beq $9 $0 npc_direita
 	
-	sw $7 1536($4)
-	sw $5, 1540($4)
-	sw $7 1544($4)
-	sw $5, 1548($4)
-	sw $7 1552($4)
-
-	#addi $4, $4, 25400
-	#sw $5, 4($4)
-	#sw $5, 8($4)
-	#sw $5, 12($4)
-	#sw $5, 512($4)
+	addi $14 $14 -4
+	jal desenharNPC
 	
-	#sw $5, 520($4)
-	#sw $6, 524($4)
-	#sw $5, 528($4)
-	#sw $6, 516($4)
+	addi $10 $14 20
+	li $8 4
+laco_npc_esquerda:
 	
-	#sw $5, 1024($4)
-	#sw $5, 1028($4)
-	#sw $5, 1032($4)
-	#sw $5, 1036($4)
-	#sw $5, 1040($4)
+	lw $9 32768($10)
+	sw $9 0($10)
 	
-	#sw $5, 1540($4)
-	#sw $5, 1548($4)
+	addi $10 $10 512
+	addi $8 $8 -1
+	bnez $8 laco_npc_esquerda
+	
+	jal timer
+	
+	addi $2 $4 1
+	
+	addi $29 $29 4                                                    
+       	lw $10 0($29)
+	addi $29 $29 4                                                    
+       	lw $9 0($29)
+	addi $29 $29 4                                                    
+       	lw $8 0($29)
+       	addi $29 $29 4                                                    
+       	lw $31 0($29)
 	
 	jr $31
+	
+npc_direita:
+
+	addi $14 $14 4
+	jal desenharNPC
+	
+	addi $10 $14 -4
+	li $8 4
+laco_npc_direita:
+	
+	lw $9 32768($10)
+	sw $9 0($10)
+	
+	addi $10 $10 512
+	addi $8 $8 -1
+	bnez $8 laco_npc_direita
+	
+	jal timer
+
+	addi $2 $4 1
+	
+	addi $29 $29 4                                                    
+       	lw $10 0($29)
+	addi $29 $29 4                                                    
+       	lw $9 0($29)
+	addi $29 $29 4                                                    
+       	lw $8 0($29)
+       	addi $29 $29 4                                                    
+       	lw $31 0($29)
+
+	jr $31
+	
+desenharNPC:
+	sw $31 0($29)
+       	addi $29 $29 -4
+	sw $15 0($29)
+       	addi $29 $29 -4
+       	sw $16 0($29)
+       	addi $29 $29 -4
+       	sw $21 0($29)
+       	addi $29 $29 -4
+       	
+	li $15, 0xffffff  # Substituindo $5 -> $15
+	li $16, 0x000000  # Substituindo $6 -> $16
+	li $21, 0x270013  # Substituindo $7 -> $21
+	
+	sw $21, 0($14)
+	sw $15, 4($14)
+	sw $15, 8($14)
+	sw $15, 12($14)
+	sw $21, 16($14)
+	
+	sw $15, 512($14)
+	sw $16, 516($14)
+	sw $15, 520($14)
+	sw $16, 524($14)
+	sw $15, 528($14)
+
+	sw $15, 1024($14)
+	sw $15, 1028($14)
+	sw $15, 1032($14)
+	sw $15, 1036($14)
+	sw $15, 1040($14)
+	
+	sw $21, 1536($14)
+	sw $15, 1540($14)
+	sw $21, 1544($14)
+	sw $15, 1548($14)
+	sw $21, 1552($14)
+
+	addi $29 $29 4                                                    
+       	lw $21 0($29)
+	addi $29 $29 4                                                    
+       	lw $16 0($29)
+	addi $29 $29 4                                                    
+       	lw $15 0($29)
+       	addi $29 $29 4                                                    
+       	lw $31 0($29)
+
+	jr $31
+
 
 
 # ================================================
@@ -1156,7 +1203,7 @@ desenharNPC:
 timer: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 1000
+       	addi $16, $0, 10000
 forT:  
 	beq $16, $0, fimT
        	nop
@@ -1173,7 +1220,7 @@ fimT:
 timerPulo: 
 	sw $16, 0($29)
        	addi $29, $29, -4
-       	addi $16, $0, 100000
+       	addi $16, $0, 50000
 forT2:  
 	beq $16, $0, fimT2
        	nop
