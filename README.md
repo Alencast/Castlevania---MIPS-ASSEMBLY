@@ -1,39 +1,48 @@
 <div align="center">
-  <h1>Castlevania - Assembly Mips</h1> 
-  Projeto de Castlevania desenvolvido em Assembly Mips  
+  <h1>Castlevania - Assembly Mips 🏰🦇</h1> 
+  <p>Projeto de Castlevania desenvolvido em Assembly MIPS</p>
 </div>
 
-## Etapa 1 - Criação do Cenário
-Conforme as regras dada pelo desenvolvimento do projeto, a quantidade de cenários seria igual a quantidade de integrantes, portanto, para Castlevania, serão dois cenários.
+---
 
-No primeiro cenário, optamos por uma escadaria que viria de frente a um castelo, onde o jogador iria enfrentar o chefão, a ser desenvolvido. O cenário seria simples, com estrelas e uma lua vermelha.
+## 🚀 Etapa 1 - Criação do Cenário  
+Conforme as regras dadas pelo desenvolvimento do projeto, a quantidade de cenários seria igual à quantidade de integrantes. Portanto, para Castlevania, serão dois cenários.
 
-### Coisas a fazer:
-1. Criação do fundo: Ok
-2. Criação do chão: Ok
-3. Criação das estrelas: Ok
-4. Criação do Castelo: Ok
-5. Detalhes no castelo: Ok
-6. Escadaria: Ok
-7. Lua: Ok
-8. Árvore 1: 
-9. Árvore 2:
-10. Transformar tudo em função:
+No primeiro cenário, optamos por uma escadaria que viria de frente a um castelo, onde o jogador enfrentaria o chefão. O cenário seria simples, com estrelas e uma lua vermelha.  
 
-## Etapa 2 - NPC e Jogador
-Nessa etapa precisamos implementar algumas mecânicas: Geração de personagem e NPC movimento e dano.
+### 📌 Coisas a fazer:
+✅ Criação do fundo  
+✅ Criação do chão  
+✅ Criação das estrelas  
+✅ Criação do Castelo  
+✅ Detalhes no castelo  
+✅ Escadaria  
+✅ Lua  
+🔲 Árvore 1  
+🔲 Árvore 2  
+🔲 Transformar tudo em função  
 
-### Coisas a fazer:
-1. Desenhar o NPC: Ok
-2. Desenhar o Jogador: Ok
-3. Movimentação NPC: Ok
+---
 
+## 🎮 Etapa 2 - NPC e Jogador  
+Nesta etapa, precisamos implementar algumas mecânicas: geração de personagem, NPC, movimento e dano.
 
-## Etapa 3 - BOSS FIGHT
-1. Movimentação Jogador:
-2. Mecânica de ataque:
-3. Mecânica de PERDEU/Dano:
-4. Desenhar o boss final:
-5. Desenhar animação final do game:
+### 📌 Coisas a fazer:
+✅ Desenhar o NPC  
+✅ Desenhar o Jogador  
+✅ Movimentação NPC  
 
-6. Colocar música, se der:
+---
+
+## ⚔️ Etapa 3 - BOSS FIGHT  
+### 📌 Coisas a fazer:
+🔲 Movimentação Jogador  
+🔲 Mecânica de ataque  
+🔲 Mecânica de PERDEU/Dano  
+🔲 Desenhar o boss final  
+🔲 Desenhar animação final do game  
+🔲 Colocar música, se der 🎵  
+
+---
+
+💻 **Desenvolvido em Assembly MIPS**
